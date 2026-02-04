@@ -1,0 +1,284 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div id="tickerContent" class="ticker-item">Checking for latest updates...</div>
+        </div>
+    </div>
+
+    <!-- Sticky Nav -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <svg width="20" height="20" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+                </svg>
+                AI News
+            </a>
+            <div class="status-badge">Online</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="hero-section">
+            <h1>Your daily briefing.</h1>
+            <p>The most important stories in Artificial Intelligence.</p>
+        </div>
+
+        <main>
+            <!-- Sidebar / Controls -->
+            <section class="card-panel controls">
+                <h2>Settings & Actions</h2>
+                <div class="controls-flex">
+                    <div class="schedule-info">
+                        <span>Daily Digest</span>
+                        <strong>09:00 AM</strong>
+                    </div>
+                    <button id="runNowBtn" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" style="margin-right:6px">
+                            <path d="M5 3l14 9-14 9V3z" />
+                        </svg>
+                        Run Job Now
+                    </button>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top:15px;">
+                        <span style="font-size: 0.9em; color: var(--text-secondary)">Refresh Feed</span>
+                        <button onclick="fetchNews()" class="btn-icon-large" title="Refresh">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M23 4v6h-6"></path>
+                                <path d="M1 20v-6h6"></path>
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News Feed -->
+            <section class="news-feed-section">
+                <div id="newsLoader" class="loader">Loading your personalized feed...</div>
+                <div id="newsList" class="news-grid">
+                    <!-- News items here -->
+                </div>
+            </section>
+
+            <section class="news-feed-section">
+                <div id="newsLoader" class="loader" style="display: none;">Fetching latest updates...</div>
+                <div id="newsList" class="news-grid">
+                    <!-- News items here -->
+                </div>
+            </section>
+
+            <section class="card-panel subscribers">
+                <h2>Subscribers</h2>
+                <div class="add-email-form">
+                    <input type="email" id="emailInput" placeholder="Enter email address" />
+                    <button id="addBtn" class="btn btn-primary" style="padding: 10px 18px;">Add</button>
+                </div>
+                <div id="subscriberList" class="subscriber-list" style="margin-top:20px">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="news-modal">
+            <div class="modal-header">
+                <span style="font-weight:600; color:var(--text-secondary)">Quick Preview</span>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="modal-meta" id="modalSource">Source</div>
+                <h3 class="modal-title" id="modalTitle">Title</h3>
+                <div class="modal-body">
+                    <p id="modalSummary">Summary content...</p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <a href="#" id="modalLink" target="_blank" class="btn btn-primary">Read Full Story ↗</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '/api/subscribers';
+
+        async function fetchSubscribers() {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            renderList(data);
+        }
+
+        function renderList(emails) {
+            const list = document.getElementById('subscriberList');
+            list.innerHTML = '';
+            emails.forEach(email => {
+                const div = document.createElement('div');
+                div.className = 'sub-item';
+                div.innerHTML = `
+                    <span>${email}</span>
+                    <button onclick="removeSubscriber('${email}')" class="remove-btn" title="Unsubscribe">
+                        &times;
+                    </button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function renderList(emails) {
+            const list = document.getElementById('subscriberList');
+            list.innerHTML = '';
+            emails.forEach(email => {
+                const div = document.createElement('div');
+                div.className = 'sub-item';
+                div.innerHTML = `
+                    <span>${email}</span>
+                    <button onclick="removeSubscriber('${email}')" class="remove-btn" title="Unsubscribe">
+                        &times;
+                    </button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        async function addSubscriber() {
+            const input = document.getElementById('emailInput');
+            const email = input.value;
+            if (!email) return;
+
+            const res = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+            const data = await res.json();
+            if (data.error) {
+                alert(data.error);
+            } else {
+                input.value = '';
+                renderList(data);
+            }
+        }
+
+        async function removeSubscriber(email) {
+            const res = await fetch(API_URL, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+            const data = await res.json();
+            renderList(data);
+        }
+
+        // --- News & Modal Logic ---
+        let currentNews = [];
+
+        function openModal(index) {
+            const item = currentNews[index];
+            if (!item) return;
+
+            document.getElementById('modalSource').innerText = item.source + ' • ' + item.published;
+            document.getElementById('modalTitle').innerText = item.title;
+            document.getElementById('modalSummary').innerText = item.summary;
+            document.getElementById('modalLink').href = item.link;
+
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        // Close on background click
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modalOverlay')) closeModal();
+        });
+
+        async function fetchNews() {
+            const loader = document.getElementById('newsLoader');
+            const list = document.getElementById('newsList');
+            const ticker = document.getElementById('tickerContent');
+
+            loader.style.display = 'block';
+            list.innerHTML = '';
+
+            try {
+                const res = await fetch('/api/news');
+                const news = await res.json();
+                currentNews = news; // Store for modal
+
+                loader.style.display = 'none';
+                if (news.error) {
+                    list.innerHTML = `<p class="error">Error: ${news.error}</p>`;
+                    return;
+                }
+
+                if (news.length === 0) {
+                    list.innerHTML = '<p class="empty">No news found in the last 24 hours.</p>';
+                    return;
+                }
+
+                // Update Ticker - Loop content
+                const tickerText = news.map(n => `  <span style="opacity:0.5; margin:0 10px;">•</span>  ${n.title}`).join('');
+                ticker.innerHTML = tickerText;
+
+                // Update Grid
+                news.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = index === 0 ? 'news-card hero-card' : 'news-card';
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => openModal(index);
+
+                    card.innerHTML = `
+                        <div class="card-content">
+                            <span class="source-tag">${item.source}</span>
+                            <h3>${item.title}</h3>
+                            <p>${item.summary.substring(0, index === 0 ? 300 : 120)}...</p>
+                            <div class="meta">
+                                <span class="date">${item.published}</span>
+                                <span style="color:var(--accent); font-weight:600">Preview</span>
+                            </div>
+                        </div>
+                    `;
+                    list.appendChild(card);
+                });
+            } catch (err) {
+                loader.style.display = 'none';
+                list.innerHTML = '<p class="error">Failed to fetch news.</p>';
+                console.error(err);
+            }
+        }
+
+        document.getElementById('addBtn').addEventListener('click', addSubscriber);
+        document.getElementById('runNowBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('runNowBtn');
+            btn.disabled = true;
+            btn.innerHTML = `Running...`;
+            await fetch('/api/run-now', { method: 'POST' });
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px"><path d="M5 3l14 9-14 9V3z"/></svg> Run Job Now`;
+                alert("News scrape started! Subscribed emails will receive updates shortly.");
+            }, 2000);
+        });
+
+        // Load initial
+        fetchSubscribers();
+        fetchNews();
+    </script>
+</body>
+
+</html>
