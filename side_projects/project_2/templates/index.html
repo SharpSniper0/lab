@@ -157,47 +157,71 @@
         </footer>
     </div>
 
-    <!-- Parkour Bot -->
-    <div id="parkour-bot" onclick="this.classList.add('flip'); setTimeout(() => this.classList.remove('flip'), 1000);">
-        <svg viewBox="0 0 64 100" width="60" height="90">
-            <!-- Head -->
-            <circle cx="32" cy="15" r="10" fill="white" />
-            <!-- Body -->
-            <line x1="32" y1="25" x2="32" y2="60" stroke="white" stroke-width="6" stroke-linecap="round" />
-            <!-- Arms -->
-            <g class="limbs arms">
-                <line x1="32" y1="35" x2="10" y2="55" class="limb-left" />
-                <line x1="32" y1="35" x2="54" y2="55" class="limb-right" />
+    <!-- Parkour Bot (Detailed Henry Stickmin) -->
+    <div id="parkour-bot">
+        <svg viewBox="0 0 64 100" width="80" height="120">
+            <!-- Head Group -->
+            <g id="head-group" transform="translate(32, 15)">
+                <circle cx="0" cy="0" r="14" fill="white" stroke="none" />
+                <!-- Glasses -->
+                <g stroke="#000" stroke-width="2.5" fill="none">
+                    <circle cx="-6" cy="0" r="4" />
+                    <circle cx="6" cy="0" r="4" />
+                    <line x1="-2" y1="0" x2="2" y2="0" />
+                    <path d="M -10 0 L -14 -3" />
+                    <path d="M 10 0 L 14 -3" />
+                </g>
             </g>
-            <!-- Legs -->
-            <g class="limbs legs">
-                <line x1="32" y1="60" x2="15" y2="95" class="limb-left" />
-                <line x1="32" y1="60" x2="49" y2="95" class="limb-right" />
-            </g>
-        </svg>
-    </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script>
-        const visitedCountries = {{ videos.get('visited_countries', []) | tojson }};
-    </script>
-    <!-- Parkour Bot -->
-    <div id="parkour-bot" onclick="this.classList.add('flip'); setTimeout(() => this.classList.remove('flip'), 1000);">
-        <svg viewBox="0 0 64 100" width="60" height="90">
-            <!-- Head -->
-            <circle cx="32" cy="15" r="10" fill="white" />
             <!-- Body -->
-            <line x1="32" y1="25" x2="32" y2="60" stroke="white" stroke-width="6" stroke-linecap="round" />
-            <!-- Arms -->
-            <g class="limbs arms">
-                <line x1="32" y1="35" x2="10" y2="55" class="limb-left" />
-                <line x1="32" y1="35" x2="54" y2="55" class="limb-right" />
+            <line x1="32" y1="29" x2="32" y2="55" stroke="white" stroke-width="6" stroke-linecap="round" />
+
+            <!-- Right Leg (Behind) -->
+            <g class="leg right-leg" transform="translate(32, 55)">
+                <line x1="0" y1="0" x2="0" y2="22" stroke="white" stroke-width="6" stroke-linecap="round"
+                    class="thigh" />
+                <g transform="translate(0, 22)" class="shin-group">
+                    <line x1="0" y1="0" x2="0" y2="25" stroke="white" stroke-width="6" stroke-linecap="round"
+                        class="shin" />
+                    <!-- Shoe -->
+                    <path d="M -5 26 L 10 26 C 12 26 12 20 8 20 L -3 20 Z" fill="#999" />
+                </g>
             </g>
-            <!-- Legs -->
-            <g class="limbs legs">
-                <line x1="32" y1="60" x2="15" y2="95" class="limb-left" />
-                <line x1="32" y1="60" x2="49" y2="95" class="limb-right" />
+
+            <!-- Left Leg (Front) -->
+            <g class="leg left-leg" transform="translate(32, 55)">
+                <line x1="0" y1="0" x2="0" y2="22" stroke="white" stroke-width="6" stroke-linecap="round"
+                    class="thigh" />
+                <g transform="translate(0, 22)" class="shin-group">
+                    <line x1="0" y1="0" x2="0" y2="25" stroke="white" stroke-width="6" stroke-linecap="round"
+                        class="shin" />
+                    <!-- Shoe -->
+                    <path d="M -5 26 L 10 26 C 12 26 12 20 8 20 L -3 20 Z" fill="#999" />
+                </g>
+            </g>
+
+            <!-- Right Arm -->
+            <g class="arm right-arm" transform="translate(32, 32)">
+                <line x1="0" y1="0" x2="0" y2="18" stroke="white" stroke-width="5" stroke-linecap="round"
+                    class="upper-arm" />
+                <g transform="translate(0, 18)" class="forearm-group">
+                    <line x1="0" y1="0" x2="0" y2="18" stroke="white" stroke-width="5" stroke-linecap="round"
+                        class="forearm" />
+                    <!-- Hand -->
+                    <circle cx="0" cy="21" r="5" fill="white" />
+                </g>
+            </g>
+
+            <!-- Left Arm -->
+            <g class="arm left-arm" transform="translate(32, 32)">
+                <line x1="0" y1="0" x2="0" y2="18" stroke="white" stroke-width="5" stroke-linecap="round"
+                    class="upper-arm" />
+                <g transform="translate(0, 18)" class="forearm-group">
+                    <line x1="0" y1="0" x2="0" y2="18" stroke="white" stroke-width="5" stroke-linecap="round"
+                        class="forearm" />
+                    <!-- Hand -->
+                    <circle cx="0" cy="21" r="5" fill="white" />
+                </g>
             </g>
         </svg>
     </div>
