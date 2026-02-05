@@ -175,28 +175,14 @@ nav {
     margin-bottom: 20px;
 }
 
-/* Masonry (Travel) */
-.masonry {
-    column-count: 3;
-    column-gap: 20px;
-}
-
-.photo-item {
-    break-inside: avoid;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-}
-
-.photo-item img {
+/* --- Travel Map --- */
+#travel-map {
+    height: 500px;
     width: 100%;
-    display: block;
-    transition: transform 0.3s;
-}
-
-.photo-item:hover img {
-    transform: scale(1.05);
+    border-radius: 20px;
+    background: #1a1a1a;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 1; /* Keep below nav */
 }
 
 /* Tabs ("What's on my mind") */
