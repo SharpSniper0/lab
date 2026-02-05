@@ -556,3 +556,167 @@ nav {
         transform: translateY(0) rotate(0) scaleY(1);
     }
 }
+
+/* --- Sophisticated Animations --- */
+
+/* Idle: Foot Tap */
+@keyframes footTap {
+
+    0%,
+    100% {
+        transform: rotate(-90deg);
+    }
+
+    50% {
+        transform: rotate(-110deg);
+    }
+}
+
+.idle-foot-tap .right-leg {
+    animation: footTap 0.3s 6 alternate ease-in-out;
+}
+
+/* Idle: Adjust Glasses (Right Arm touches face) */
+@keyframes adjustGlassesArm {
+
+    0%,
+    100% {
+        transform: rotate(-30deg);
+    }
+
+    /* Sitting pos */
+    40% {
+        transform: rotate(-150deg);
+    }
+
+    /* Touch glasses */
+    60% {
+        transform: rotate(-140deg);
+    }
+
+    /* Adjust */
+    80% {
+        transform: rotate(-150deg);
+    }
+
+    /* Touch */
+}
+
+.idle-adjust-glasses .right-arm {
+    animation: adjustGlassesArm 2s ease-in-out;
+}
+
+/* Action: Clean Window (Wiping Motion) */
+@keyframes wipeWindowRight {
+
+    0%,
+    100% {
+        transform: rotate(-30deg);
+    }
+
+    20% {
+        transform: rotate(-130deg);
+    }
+
+    40% {
+        transform: rotate(-90deg);
+    }
+
+    60% {
+        transform: rotate(-130deg);
+    }
+
+    80% {
+        transform: rotate(-90deg);
+    }
+}
+
+.action-clean-window .right-arm {
+    animation: wipeWindowRight 2.5s ease-in-out;
+}
+
+/* Action: Balance (Wobble) */
+@keyframes wobbleBody {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-1px) rotate(3deg);
+    }
+
+    75% {
+        transform: translateY(-1px) rotate(-3deg);
+    }
+}
+
+.action-balance svg {
+    animation: wobbleBody 1.2s infinite ease-in-out;
+}
+
+.action-balance .left-arm {
+    transform: rotate(-100deg) !important;
+    transition: 0.3s;
+}
+
+.action-balance .right-arm {
+    transform: rotate(-100deg) !important;
+    transition: 0.3s;
+}
+
+/* Interaction: Wave */
+@keyframes waveHand {
+
+    0%,
+    100% {
+        transform: rotate(-130deg);
+    }
+
+    25% {
+        transform: rotate(-160deg);
+    }
+
+    75% {
+        transform: rotate(-100deg);
+    }
+}
+
+.interactive-wave .right-arm {
+    animation: waveHand 1s ease-in-out;
+}
+
+/* --- Dismiss Button --- */
+.bot-dismiss {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    background: rgba(44, 44, 46, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.bot-dismiss:hover {
+    background: #ff3b30;
+    border-color: #ff3b30;
+}
+
+#parkour-bot:hover .bot-dismiss {
+    opacity: 1;
+    top: -30px;
+    /* Float up slightly */
+}
