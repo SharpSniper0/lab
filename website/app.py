@@ -108,6 +108,16 @@ def home():
         
     return render_template('index.html', photos=photos, videos=videos)
 
+@app.after_request
+def add_header(response):
+    """
+    Add headers to disable caching so updates appear instantly.
+    """
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
 if __name__ == '__main__':
     print(f"Project 2 running locally. Open http://localhost:5002")
     # Put some demo photos if empty?
