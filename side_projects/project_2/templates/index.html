@@ -66,7 +66,8 @@
         <section id="travel">
             <h2>Wanderlust</h2>
             <p style="margin-bottom:30px">Snapshots from my adventures around the globe. (Drop photos in
-                <code>static/photos</code>)</p>
+                <code>static/photos</code>)
+            </p>
             <div class="masonry">
                 {% if photos %}
                 {% for photo in photos %}
@@ -133,28 +134,29 @@
         <!-- Music -->
         <section id="music">
             <h2>Vibes</h2>
-            <div class="music-grid">
-                <a href="#" class="music-link">
-                    <span>🎵</span>
-                    <div>
-                        <strong>Current Favorites</strong>
-                        <div style="font-size:0.8rem; color:var(--text-secondary)">Spotify Playlist</div>
-                    </div>
-                </a>
-                <a href="#" class="music-link">
-                    <span>🍎</span>
-                    <div>
-                        <strong>Chill Mix</strong>
-                        <div style="font-size:0.8rem; color:var(--text-secondary)">Apple Music</div>
-                    </div>
-                </a>
-                <a href="#" class="music-link">
-                    <span>▶️</span>
-                    <div>
-                        <strong>Coding LoFi</strong>
-                        <div style="font-size:0.8rem; color:var(--text-secondary)">YouTube Music</div>
-                    </div>
-                </a>
+            <p style="margin-bottom:20px; color:var(--text-secondary)">My rotation from YouTube Music.</p>
+
+            <div class="video-grid">
+                {% if videos.get('music') %}
+                {% for url in videos.get('music', []) %}
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/{{ get_video_id(url) }}" title="Music"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="music-grid">
+                    <a href="https://music.youtube.com" target="_blank" class="music-link">
+                        <span>▶️</span>
+                        <div>
+                            <strong>YouTube Music</strong>
+                            <div style="font-size:0.8rem; color:var(--text-secondary)">Add links to content.json to see
+                                them here</div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
             </div>
         </section>
 
@@ -162,7 +164,7 @@
         <section id="resume-section" class="resume-section">
             <h2>Work with me.</h2>
             <p style="margin-bottom:30px">Download my resume to see my full professional history.</p>
-            <a href="#" class="btn" download>Download PDF</a>
+            <a href="{{ url_for('static', filename='resume/resume.pdf') }}" class="btn" download>Download PDF</a>
         </section>
 
         <footer style="text-align: center; padding: 50px 0; color: #444;">

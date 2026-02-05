@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Configuration
 PHOTO_FOLDER = os.path.join('static', 'photos')
-CONTENT_FILE = 'content.json'
+CONTENT_FILE = os.path.join('content', 'content.json')
 
 def get_photos():
     """Returns a list of filenames in the photo folder."""
@@ -28,11 +28,14 @@ def get_videos():
             return {}
 
 def get_video_id(url):
-    """Extracts YouTube ID from URL (Basic implementation)"""
+    """Extracts YouTube ID from URL (Handles standard and YT Music links)"""
+    # Handle known patterns
     if 'youtu.be/' in url:
         return url.split('youtu.be/')[1].split('?')[0]
-    if 'youtube.com/watch?v=' in url:
+    
+    if 'v=' in url: # Covers youtube.com and music.youtube.com
         return url.split('v=')[1].split('&')[0]
+        
     return url # Fallback
 
 @app.context_processor
