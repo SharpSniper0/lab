@@ -425,36 +425,105 @@ nav {
     animation: walkArms 0.8s infinite linear;
 }
 
-/* Sitting State */
+/* --- New Interactions --- */
+
+/* Falling State (Gravity) */
+.falling {
+    transition: top 0.8s cubic-bezier(0.6, 0.04, 0.98, 0.335), left 0.8s linear;
+}
+
+.falling .left-arm {
+    transform: rotate(-150deg);
+    transition: 0.3s;
+}
+
+.falling .right-arm {
+    transform: rotate(-150deg);
+    transition: 0.3s;
+}
+
+.falling .left-leg {
+    transform: rotate(10deg);
+    transition: 0.3s;
+}
+
+.falling .right-leg {
+    transform: rotate(-10deg);
+    transition: 0.3s;
+}
+
+/* Sitting State (With Breathing) */
+@keyframes heavyBreathing {
+
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(1.03) translateY(-1px);
+    }
+}
+
+@keyframes armBreathL {
+
+    0%,
+    100% {
+        transform: rotate(30deg);
+    }
+
+    50% {
+        transform: rotate(25deg);
+    }
+}
+
+@keyframes armBreathR {
+
+    0%,
+    100% {
+        transform: rotate(-30deg);
+    }
+
+    50% {
+        transform: rotate(-25deg);
+    }
+}
+
+.sitting svg {
+    animation: heavyBreathing 3s infinite ease-in-out;
+}
+
 .sitting .left-leg {
     transform: rotate(-80deg);
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .sitting .right-leg {
     transform: rotate(-90deg);
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .sitting .shin-group {
     transform: rotate(90deg) translate(2px, 2px);
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .sitting .left-arm {
     transform: rotate(30deg);
-    transition: 0.3s;
+    animation: armBreathL 3s infinite ease-in-out;
 }
 
 .sitting .right-arm {
     transform: rotate(-30deg);
-    transition: 0.3s;
+    animation: armBreathR 3s infinite ease-in-out;
 }
 
 .sitting .forearm-group {
-    transform: rotate(-45deg);
-    transition: 0.3s;
+    transform: rotate(-90deg);
+    transition: 0.5s;
 }
+
+/* Hands on lap */
 
 /* Jumping State */
 .jumping-arc .left-leg {

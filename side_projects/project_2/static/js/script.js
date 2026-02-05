@@ -175,79 +175,55 @@ if (bot) {
     }
 
     function jumpTo(element) {
+        if (isJumping) return; // Debounce
         isJumping = true;
-        clearInterval(walkInterval); // Stop any walking
+        clearInterval(walkInterval);
 
         currentTarget = element;
-        bot.classList.remove('sitting', 'walking');
-        bot.classList.add('jumping-arc');
+        // Clean previous states
+        bot.classList.remove('sitting', 'walking', 'jumping-arc', 'falling');
 
         const rect = element.getBoundingClientRect();
         const scrollY = window.scrollY;
 
-        // Determine Land Spot
-        const isTitle = element.tagName === 'H1';
         let endLeft;
+        const isTitle = element.tagName === 'H1';
 
         if (isTitle) {
-            endLeft = rect.left; // Start at left of Title
+            endLeft = rect.left + rect.width - 50; // Sit near end of title
         } else {
-            // Sit near right edge for cards
             endLeft = (rect.left + rect.width) - 60;
         }
 
-        // Face direction
         const startLeft = parseFloat(bot.style.left) || 0;
+        const startTop = parseFloat(bot.style.top) || 0;
+        const endTop = (rect.top + scrollY) - 85;
+
+        // Face Landing Spot
         bot.style.transform = endLeft < startLeft ? 'scaleX(-1)' : 'scaleX(1)';
 
-        // Move
-        bot.style.top = `${(rect.top + scrollY) - 85}px`;
+        // Logic: Fall if target is significantly below
+        const isFalling = endTop > (startTop + 100);
+
+        if (isFalling) {
+            bot.classList.add('falling');
+        } else {
+            bot.classList.add('jumping-arc');
+        }
+
+        // Execute Move
+        // Ensure browser registers the class change before moving properties if needed, 
+        // but typically CSS transition handles the property change immediately.
+        bot.style.top = `${endTop}px`;
         bot.style.left = `${endLeft}px`;
 
-        // Land
+        const duration = isFalling ? 800 : 700; // Falling might take longer
+
         setTimeout(() => {
-            bot.classList.remove('jumping-arc');
+            bot.classList.remove('jumping-arc', 'falling');
+            bot.classList.add('sitting'); // "Catch Breath" animation triggers
             isJumping = false;
-
-            if (isTitle) {
-                startPatrol(element);
-            } else {
-                bot.classList.add('sitting');
-            }
-        }, 600);
-    }
-
-    function startPatrol(element) {
-        bot.classList.add('walking');
-        let direction = 1;
-
-        // Ensure starting face
-        bot.style.transform = 'scaleX(1)';
-
-        walkInterval = setInterval(() => {
-            if (isJumping) return;
-            const rect = element.getBoundingClientRect();
-            const currentLeft = parseFloat(bot.style.left) || 0;
-            const speed = 2; // px per tick
-
-            // Bounds: Tighter to stay on top of text
-            // rect.width is now exactly the text width (due to fit-content)
-            const maxLeft = rect.left + rect.width - 60; // Turn before falling off right
-            const minLeft = rect.left + 10; // Turn before falling off left
-
-            let newLeft = currentLeft + (speed * direction);
-
-            // Turn around
-            if (newLeft > maxLeft) {
-                direction = -1;
-                bot.style.transform = 'scaleX(-1)';
-            } else if (newLeft < minLeft) {
-                direction = 1;
-                bot.style.transform = 'scaleX(1)';
-            }
-
-            bot.style.left = `${newLeft}px`;
-        }, 20);
+        }, duration);
     }
 
     // Run loop
@@ -257,9 +233,9 @@ if (bot) {
     const h1 = document.querySelector('h1');
     if (h1) {
         const rect = h1.getBoundingClientRect();
-        bot.style.top = `${rect.top - 70}px`; // Adjusted for bot height
-        bot.style.left = `${rect.left}px`;
-        currentTarget = h1; // Set initial target
-        startPatrol(h1); // Start walking immediately
+        bot.style.top = `${rect.top - 70}px`;
+        bot.style.left = `${rect.left + rect.width - 50}px`;
+        currentTarget = h1;
+        bot.classList.add('sitting'); // Direct to sitting
     }
 }
