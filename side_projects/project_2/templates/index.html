@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amay Maheshwari</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 
 <body>
@@ -62,29 +64,11 @@
             </div>
         </section>
 
-        <!-- Travel (Wanderlust) -->
+        <!-- Travel (Interactive Map) -->
         <section id="travel">
             <h2>Wanderlust</h2>
-            <p style="margin-bottom:30px">Snapshots from my adventures around the globe. (Drop photos in
-                <code>static/photos</code>)
-            </p>
-            <div class="masonry">
-                {% if photos %}
-                {% for photo in photos %}
-                <div class="photo-item">
-                    <img src="{{ url_for('static', filename='photos/' + photo) }}" alt="Travel Photo">
-                </div>
-                {% endfor %}
-                {% else %}
-                <!-- Fallback Placeholders -->
-                <div class="photo-item"><img
-                        src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=500&q=80" alt="Travel 1">
-                </div>
-                <div class="photo-item"><img
-                        src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&q=80" alt="Travel 2">
-                </div>
-                {% endif %}
-            </div>
+            <p style="margin-bottom:30px">Countries I've explored. Hover to discover.</p>
+            <div id="travel-map"></div>
         </section>
 
         <!-- What's on my mind (Tabs: History, Tech, Cars) -->
@@ -173,6 +157,11 @@
         </footer>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        const visitedCountries = {{ videos.get('visited_countries', []) | tojson }};
+    </script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 

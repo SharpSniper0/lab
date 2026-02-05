@@ -14,5 +14,29 @@
     ],
     "music": [
         "https://music.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "visited_countries": [
+        "CAN",
+        "FRA",
+        "GIB",
+        "HKG",
+        "HUN",
+        "IND",
+        "ITA",
+        "JPN",
+        "KEN",
+        "MYS",
+        "NLD",
+        "NZL",
+        "PRI",
+        "SGP",
+        "LKA",
+        "ESP",
+        "THA",
+        "TUR",
+        "ARE",
+        "GBR",
+        "USA",
+        "VAT"
     ]
 }
