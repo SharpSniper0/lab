@@ -130,41 +130,81 @@ function onEachFeature(feature, layer) {
     }
 }
 
-// --- Parkour Bot Logic ---
+// --- Henry Stickmin Parkour Logic ---
 const bot = document.getElementById('parkour-bot');
 
 if (bot) {
-    let scrollTimeout;
-    let lastScrollY = 0;
+    let currentTarget = null;
+    let isJumping = false;
 
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        const speed = Math.abs(currentScrollY - lastScrollY);
+    function getTargets() {
+        // Elements he can sit on: Videos, Cards, Map, Nav?
+        return Array.from(document.querySelectorAll('.video-card, .card, #travel-map, .hero'));
+    }
 
-        // Clear previous idle timeout
-        clearTimeout(scrollTimeout);
+    function updatePos() {
+        if (isJumping) return;
 
-        // Determine Action
-        if (speed > 40) { // Fast scroll = Jump
-            bot.classList.add('jumping');
-            bot.classList.remove('running');
-        } else if (speed > 5) { // Slow scroll = Run
-            bot.classList.remove('jumping');
-            bot.classList.add('running');
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        // Focus line: slightly above center screen where users look
+        const focusLine = scrollY + (viewportHeight * 0.35);
+
+        const targets = getTargets();
+        let bestTarget = null;
+        let minDistance = Infinity;
+
+        targets.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const elTopAbs = rect.top + scrollY;
+
+            // Only consider elements that are visible-ish
+            if (rect.bottom > 0 && rect.top < viewportHeight) {
+                const dist = Math.abs(elTopAbs - focusLine);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    bestTarget = el;
+                }
+            }
+        });
+
+        if (bestTarget && bestTarget !== currentTarget) {
+            jumpTo(bestTarget);
         }
+    }
 
-        // Face direction
-        if (currentScrollY > lastScrollY) {
-            bot.style.transform = 'scaleX(1)';
+    function jumpTo(element) {
+        isJumping = true;
+
+        // Calculate Direction
+        const rect = element.getBoundingClientRect();
+        const startLeft = parseFloat(bot.style.left) || 0;
+        const endLeft = (rect.left + rect.width) - 60; // Sit near right edge
+
+        if (endLeft < startLeft) {
+            bot.style.transform = 'scaleX(-1)'; // Face Left
         } else {
-            bot.style.transform = 'scaleX(-1)';
+            bot.style.transform = 'scaleX(1)'; // Face Right
         }
 
-        // Stop logic
-        scrollTimeout = setTimeout(() => {
-            bot.classList.remove('running', 'jumping');
-        }, 100);
+        currentTarget = element;
+        bot.classList.remove('sitting');
+        bot.classList.add('jumping-arc');
 
-        lastScrollY = currentScrollY;
-    });
+        // Landing calculation
+        const scrollY = window.scrollY;
+        // -85px puts his feet roughly on the border
+        bot.style.top = `${(rect.top + scrollY) - 85}px`;
+        bot.style.left = `${endLeft}px`;
+
+        // Recovery
+        setTimeout(() => {
+            bot.classList.remove('jumping-arc');
+            bot.classList.add('sitting');
+            isJumping = false;
+        }, 700);
+    }
+
+    // Run loop
+    setInterval(updatePos, 300); // "Think" every 300ms
 }
