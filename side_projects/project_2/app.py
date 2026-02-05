@@ -44,7 +44,7 @@ def get_latest_songs():
         ydl_opts = {
             'quiet': True,
             'extract_flat': True,
-            'playlistend': 5,
+            'playlistend': 9,
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
