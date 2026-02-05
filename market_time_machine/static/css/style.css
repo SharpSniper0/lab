@@ -467,13 +467,19 @@ input[type=range]::-webkit-slider-runnable-track {
 
 
         /* --- Glitched Currency Background --- */
+        .timeline-grid {
+            position: relative;
+            z-index: 10;
+        }
+
         .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1;
+            z-index: 1;
+            /* Above body background */
             overflow: hidden;
             pointer-events: none;
         }
