@@ -190,14 +190,14 @@ if (bot) {
         const isTitle = element.tagName === 'H1';
 
         if (isTitle) {
-            endLeft = rect.left + rect.width - 50; // Sit near end of title
+            endLeft = rect.left + 20; // Sit near START of title
         } else {
             endLeft = (rect.left + rect.width) - 60;
         }
 
         const startLeft = parseFloat(bot.style.left) || 0;
         const startTop = parseFloat(bot.style.top) || 0;
-        const endTop = (rect.top + scrollY) - 85;
+        const endTop = (rect.top + scrollY) - 55; // Lowered from -85
 
         // Face Landing Spot
         bot.style.transform = endLeft < startLeft ? 'scaleX(-1)' : 'scaleX(1)';
@@ -233,8 +233,8 @@ if (bot) {
     const h1 = document.querySelector('h1');
     if (h1) {
         const rect = h1.getBoundingClientRect();
-        bot.style.top = `${rect.top - 70}px`;
-        bot.style.left = `${rect.left + rect.width - 50}px`;
+        bot.style.top = `${rect.top - 55}px`;
+        bot.style.left = `${rect.left + 20}px`;
         currentTarget = h1;
         bot.classList.add('sitting'); // Direct to sitting
     }
