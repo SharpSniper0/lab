@@ -129,3 +129,42 @@ function onEachFeature(feature, layer) {
         });
     }
 }
+
+// --- Parkour Bot Logic ---
+const bot = document.getElementById('parkour-bot');
+
+if (bot) {
+    let scrollTimeout;
+    let lastScrollY = 0;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const speed = Math.abs(currentScrollY - lastScrollY);
+
+        // Clear previous idle timeout
+        clearTimeout(scrollTimeout);
+
+        // Determine Action
+        if (speed > 40) { // Fast scroll = Jump
+            bot.classList.add('jumping');
+            bot.classList.remove('running');
+        } else if (speed > 5) { // Slow scroll = Run
+            bot.classList.remove('jumping');
+            bot.classList.add('running');
+        }
+
+        // Face direction
+        if (currentScrollY > lastScrollY) {
+            bot.style.transform = 'scaleX(1)';
+        } else {
+            bot.style.transform = 'scaleX(-1)';
+        }
+
+        // Stop logic
+        scrollTimeout = setTimeout(() => {
+            bot.classList.remove('running', 'jumping');
+        }, 100);
+
+        lastScrollY = currentScrollY;
+    });
+}

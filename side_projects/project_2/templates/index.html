@@ -157,11 +157,51 @@
         </footer>
     </div>
 
+    <!-- Parkour Bot -->
+    <div id="parkour-bot" onclick="this.classList.add('flip'); setTimeout(() => this.classList.remove('flip'), 1000);">
+        <svg viewBox="0 0 64 100" width="60" height="90">
+            <!-- Head -->
+            <circle cx="32" cy="15" r="10" fill="white" />
+            <!-- Body -->
+            <line x1="32" y1="25" x2="32" y2="60" stroke="white" stroke-width="6" stroke-linecap="round" />
+            <!-- Arms -->
+            <g class="limbs arms">
+                <line x1="32" y1="35" x2="10" y2="55" class="limb-left" />
+                <line x1="32" y1="35" x2="54" y2="55" class="limb-right" />
+            </g>
+            <!-- Legs -->
+            <g class="limbs legs">
+                <line x1="32" y1="60" x2="15" y2="95" class="limb-left" />
+                <line x1="32" y1="60" x2="49" y2="95" class="limb-right" />
+            </g>
+        </svg>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         const visitedCountries = {{ videos.get('visited_countries', []) | tojson }};
     </script>
+    <!-- Parkour Bot -->
+    <div id="parkour-bot" onclick="this.classList.add('flip'); setTimeout(() => this.classList.remove('flip'), 1000);">
+        <svg viewBox="0 0 64 100" width="60" height="90">
+            <!-- Head -->
+            <circle cx="32" cy="15" r="10" fill="white" />
+            <!-- Body -->
+            <line x1="32" y1="25" x2="32" y2="60" stroke="white" stroke-width="6" stroke-linecap="round" />
+            <!-- Arms -->
+            <g class="limbs arms">
+                <line x1="32" y1="35" x2="10" y2="55" class="limb-left" />
+                <line x1="32" y1="35" x2="54" y2="55" class="limb-right" />
+            </g>
+            <!-- Legs -->
+            <g class="limbs legs">
+                <line x1="32" y1="60" x2="15" y2="95" class="limb-left" />
+                <line x1="32" y1="60" x2="49" y2="95" class="limb-right" />
+            </g>
+        </svg>
+    </div>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
