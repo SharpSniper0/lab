@@ -1,0 +1,420 @@
+/* --- Parkour Bot (Henry Version) --- */
+#parkour-bot {
+    position: absolute;
+    top: 15vh;
+    /* Start somewhere visible */
+    right: 10%;
+    z-index: 9999;
+    pointer-events: none;
+    /* Don't block clicks on videos */
+    transition: top 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+    will-change: top, left, transform;
+}
+
+#parkour-bot svg {
+    overflow: visible;
+}
+
+/* --- Skeleton Joints (Crucial for Connection) --- */
+.arm,
+.forearm-group,
+.leg,
+.shin-group {
+    transform-origin: 0px 0px !important;
+}
+
+/* --- Parkour Bot Interactions --- */
+/* Walking (The Henry Strut) */
+@keyframes walkLegs {
+    0% {
+        transform: rotate(-25deg);
+    }
+
+    50% {
+        transform: rotate(25deg);
+    }
+
+    100% {
+        transform: rotate(-25deg);
+    }
+}
+
+@keyframes walkKnees {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(30deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes walkArms {
+    0% {
+        transform: rotate(25deg);
+    }
+
+    50% {
+        transform: rotate(-25deg);
+    }
+
+    100% {
+        transform: rotate(25deg);
+    }
+}
+
+@keyframes bob {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.walking svg {
+    animation: bob 0.6s infinite ease-in-out;
+}
+
+.walking .left-leg {
+    animation: walkLegs 0.8s infinite linear;
+}
+
+.walking .right-leg {
+    animation: walkLegs 0.8s infinite linear reverse;
+}
+
+.walking .right-leg .shin-group {
+    animation: walkKnees 0.8s infinite linear reverse;
+}
+
+.walking .left-leg .shin-group {
+    animation: walkKnees 0.8s infinite linear;
+}
+
+.walking .left-arm {
+    animation: walkArms 0.8s infinite linear reverse;
+}
+
+.walking .right-arm {
+    animation: walkArms 0.8s infinite linear;
+}
+
+/* --- New Interactions --- */
+
+/* Falling State (Gravity) */
+.falling {
+    transition: top 0.8s cubic-bezier(0.6, 0.04, 0.98, 0.335), left 0.8s linear;
+}
+
+.falling .left-arm {
+    transform: rotate(-150deg);
+    transition: 0.3s;
+}
+
+.falling .right-arm {
+    transform: rotate(-150deg);
+    transition: 0.3s;
+}
+
+.falling .left-leg {
+    transform: rotate(10deg);
+    transition: 0.3s;
+}
+
+.falling .right-leg {
+    transform: rotate(-10deg);
+    transition: 0.3s;
+}
+
+/* Sitting State (With Breathing) */
+@keyframes heavyBreathing {
+
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(1.03) translateY(-1px);
+    }
+}
+
+@keyframes armBreathL {
+
+    0%,
+    100% {
+        transform: rotate(30deg);
+    }
+
+    50% {
+        transform: rotate(25deg);
+    }
+}
+
+@keyframes armBreathR {
+
+    0%,
+    100% {
+        transform: rotate(-30deg);
+    }
+
+    50% {
+        transform: rotate(-25deg);
+    }
+}
+
+.sitting svg {
+    animation: heavyBreathing 3s infinite ease-in-out;
+}
+
+.sitting .left-leg {
+    transform: rotate(-80deg);
+    transition: 0.5s;
+}
+
+.sitting .right-leg {
+    transform: rotate(-90deg);
+    transition: 0.5s;
+}
+
+.sitting .shin-group {
+    transform: rotate(90deg) translate(2px, 2px);
+    transition: 0.5s;
+}
+
+.sitting .left-arm {
+    transform: rotate(30deg);
+    animation: armBreathL 3s infinite ease-in-out;
+}
+
+.sitting .right-arm {
+    transform: rotate(-30deg);
+    animation: armBreathR 3s infinite ease-in-out;
+}
+
+.sitting .forearm-group {
+    transform: rotate(-90deg);
+    transition: 0.5s;
+}
+
+/* Hands on lap */
+
+/* Jumping State */
+.jumping-arc .left-leg {
+    transform: rotate(-20deg);
+    transition: 0.1s;
+}
+
+.jumping-arc .right-leg {
+    transform: rotate(45deg);
+    transition: 0.1s;
+}
+
+.jumping-arc .left-arm {
+    transform: rotate(-130deg);
+    transition: 0.1s;
+}
+
+.jumping-arc .right-arm {
+    transform: rotate(-130deg);
+    transition: 0.1s;
+}
+
+/* Jump Animation */
+.jumping-arc {
+    animation: jumpPhysics 0.6s cubic-bezier(0.5, 0, 0.5, 1) forwards;
+}
+
+@keyframes jumpPhysics {
+    0% {
+        transform: translateY(0) scaleY(0.9);
+    }
+
+    40% {
+        transform: translateY(-120px) rotate(5deg) scaleY(1.05);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0) scaleY(1);
+    }
+}
+
+/* --- Sophisticated Animations --- */
+
+/* Idle: Foot Tap */
+@keyframes footTap {
+
+    0%,
+    100% {
+        transform: rotate(-90deg);
+    }
+
+    50% {
+        transform: rotate(-110deg);
+    }
+}
+
+.idle-foot-tap .right-leg {
+    animation: footTap 0.3s 6 alternate ease-in-out;
+}
+
+/* Idle: Adjust Glasses (Right Arm touches face) */
+@keyframes adjustGlassesArm {
+
+    0%,
+    100% {
+        transform: rotate(-30deg);
+    }
+
+    /* Sitting pos */
+    40% {
+        transform: rotate(-150deg);
+    }
+
+    /* Touch glasses */
+    60% {
+        transform: rotate(-140deg);
+    }
+
+    /* Adjust */
+    80% {
+        transform: rotate(-150deg);
+    }
+
+    /* Touch */
+}
+
+.idle-adjust-glasses .right-arm {
+    animation: adjustGlassesArm 2s ease-in-out;
+}
+
+/* Action: Clean Window (Wiping Motion) */
+/* Action: Clean Window (Wiping Motion - Downwards) */
+@keyframes wipeWindowRight {
+
+    0%,
+    100% {
+        transform: rotate(10deg);
+    }
+
+    25% {
+        transform: rotate(50deg) translate(0, 5px);
+    }
+
+    50% {
+        transform: rotate(20deg) translate(0, 2px);
+    }
+
+    75% {
+        transform: rotate(50deg) translate(0, 5px);
+    }
+}
+
+.action-clean-window .right-arm {
+    animation: wipeWindowRight 2.5s ease-in-out;
+}
+
+/* Action: Balance (Wobble) */
+@keyframes wobbleBody {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-1px) rotate(3deg);
+    }
+
+    75% {
+        transform: translateY(-1px) rotate(-3deg);
+    }
+}
+
+.action-balance svg {
+    animation: wobbleBody 1.2s infinite ease-in-out;
+}
+
+.action-balance .left-arm {
+    transform: rotate(-100deg) !important;
+    transition: 0.3s;
+}
+
+.action-balance .right-arm {
+    transform: rotate(-100deg) !important;
+    transition: 0.3s;
+}
+
+/* Interaction: Wave */
+@keyframes waveHand {
+
+    0%,
+    100% {
+        transform: rotate(-130deg);
+    }
+
+    25% {
+        transform: rotate(-160deg);
+    }
+
+    75% {
+        transform: rotate(-100deg);
+    }
+}
+
+.interactive-wave .right-arm {
+    animation: waveHand 1s ease-in-out;
+}
+
+/* --- Dismiss Button --- */
+.bot-dismiss {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    background: rgba(44, 44, 46, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.bot-dismiss:hover {
+    background: #ff3b30;
+    border-color: #ff3b30;
+}
+
+#parkour-bot:hover .bot-dismiss {
+    opacity: 1;
+    top: -30px;
+    /* Float up slightly */
+}
