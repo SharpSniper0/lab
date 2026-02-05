@@ -465,8 +465,85 @@ input[type=range]::-webkit-slider-runnable-track {
             /* Expand fully */
         }
 
-        #event-log {
-            display: none;
-            /* Hide log on mobile to save space */
+
+        /* --- Glitched Currency Background --- */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
         }
-    }
+
+        .currency-symbol {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.04);
+            font-family: var(--font-mono);
+            font-weight: 800;
+            user-select: none;
+            will-change: transform, opacity;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translateY(110vh) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.08;
+            }
+
+            85% {
+                opacity: 0.08;
+            }
+
+            100% {
+                transform: translateY(-20vh) rotate(180deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Glitch Frames */
+        @keyframes shatter {
+            0% {
+                transform: translate(0) skew(0deg);
+                clip-path: inset(0 0 0 0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px) skew(10deg);
+                clip-path: inset(20% 0 30% 0);
+            }
+
+            40% {
+                transform: translate(2px, -2px) skew(-10deg);
+                clip-path: inset(10% 0 60% 0);
+            }
+
+            60% {
+                transform: translate(-2px, 0) skew(5deg);
+                clip-path: inset(40% 0 20% 0);
+            }
+
+            80% {
+                transform: translate(2px, 2px) skew(-5deg);
+                clip-path: inset(50% 0 10% 0);
+            }
+
+            100% {
+                transform: translate(0) skew(0deg);
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        .currency-symbol.glitch {
+            animation: drift 20s linear infinite, shatter 3s infinite steps(10);
+            color: rgba(255, 59, 48, 0.15);
+            /* Red tint when glitching */
+            text-shadow: 2px 0 rgba(41, 151, 255, 0.2), -2px 0 rgba(255, 59, 48, 0.2);
+        }

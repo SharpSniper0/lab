@@ -76,4 +76,5 @@ def get_data(era_id):
     return jsonify(data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    print("Market Time Machine running on http://localhost:5003")
+    app.run(debug=True, port=5003)
