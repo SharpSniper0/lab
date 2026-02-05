@@ -136,10 +136,10 @@ const bot = document.getElementById('parkour-bot');
 if (bot) {
     let currentTarget = null;
     let isJumping = false;
+    let walkInterval = null;
 
     function getTargets() {
-        // Elements he can sit on: Videos, Cards, Map, Nav?
-        return Array.from(document.querySelectorAll('.video-card, .card, #travel-map, .hero'));
+        return Array.from(document.querySelectorAll('.video-card, .card, #travel-map, h1'));
     }
 
     function updatePos() {
@@ -147,8 +147,7 @@ if (bot) {
 
         const scrollY = window.scrollY;
         const viewportHeight = window.innerHeight;
-        // Focus line: slightly above center screen where users look
-        const focusLine = scrollY + (viewportHeight * 0.35);
+        const focusLine = scrollY + (viewportHeight * 0.3); // Look slightly up
 
         const targets = getTargets();
         let bestTarget = null;
@@ -158,7 +157,6 @@ if (bot) {
             const rect = el.getBoundingClientRect();
             const elTopAbs = rect.top + scrollY;
 
-            // Only consider elements that are visible-ish
             if (rect.bottom > 0 && rect.top < viewportHeight) {
                 const dist = Math.abs(elTopAbs - focusLine);
                 if (dist < minDistance) {
@@ -170,41 +168,94 @@ if (bot) {
 
         if (bestTarget && bestTarget !== currentTarget) {
             jumpTo(bestTarget);
+        } else if (!currentTarget && bestTarget) {
+            // Initial spawn case if not already handled
+            jumpTo(bestTarget);
         }
     }
 
     function jumpTo(element) {
         isJumping = true;
-
-        // Calculate Direction
-        const rect = element.getBoundingClientRect();
-        const startLeft = parseFloat(bot.style.left) || 0;
-        const endLeft = (rect.left + rect.width) - 60; // Sit near right edge
-
-        if (endLeft < startLeft) {
-            bot.style.transform = 'scaleX(-1)'; // Face Left
-        } else {
-            bot.style.transform = 'scaleX(1)'; // Face Right
-        }
+        clearInterval(walkInterval); // Stop any walking
 
         currentTarget = element;
-        bot.classList.remove('sitting');
+        bot.classList.remove('sitting', 'walking');
         bot.classList.add('jumping-arc');
 
-        // Landing calculation
+        const rect = element.getBoundingClientRect();
         const scrollY = window.scrollY;
-        // -85px puts his feet roughly on the border
+
+        // Determine Land Spot
+        const isTitle = element.tagName === 'H1';
+        let endLeft;
+
+        if (isTitle) {
+            endLeft = rect.left; // Start at left of Title
+        } else {
+            // Sit near right edge for cards
+            endLeft = (rect.left + rect.width) - 60;
+        }
+
+        // Face direction
+        const startLeft = parseFloat(bot.style.left) || 0;
+        bot.style.transform = endLeft < startLeft ? 'scaleX(-1)' : 'scaleX(1)';
+
+        // Move
         bot.style.top = `${(rect.top + scrollY) - 85}px`;
         bot.style.left = `${endLeft}px`;
 
-        // Recovery
+        // Land
         setTimeout(() => {
             bot.classList.remove('jumping-arc');
-            bot.classList.add('sitting');
             isJumping = false;
-        }, 700);
+
+            if (isTitle) {
+                startPatrol(element);
+            } else {
+                bot.classList.add('sitting');
+            }
+        }, 600);
+    }
+
+    function startPatrol(element) {
+        bot.classList.add('walking');
+        let direction = 1;
+
+        walkInterval = setInterval(() => {
+            if (isJumping) return;
+            const rect = element.getBoundingClientRect();
+            const currentLeft = parseFloat(bot.style.left) || 0;
+            const speed = 2; // px per tick
+
+            // Bounds
+            const maxLeft = rect.left + rect.width - 40;
+            const minLeft = rect.left;
+
+            let newLeft = currentLeft + (speed * direction);
+
+            // Turn around
+            if (newLeft > maxLeft) {
+                direction = -1;
+                bot.style.transform = 'scaleX(-1)';
+            } else if (newLeft < minLeft) {
+                direction = 1;
+                bot.style.transform = 'scaleX(1)';
+            }
+
+            bot.style.left = `${newLeft}px`;
+        }, 20);
     }
 
     // Run loop
-    setInterval(updatePos, 300); // "Think" every 300ms
+    setInterval(updatePos, 300);
+
+    // Initial spawn on H1
+    const h1 = document.querySelector('h1');
+    if (h1) {
+        const rect = h1.getBoundingClientRect();
+        bot.style.top = `${rect.top - 70}px`; // Adjusted for bot height
+        bot.style.left = `${rect.left}px`;
+        currentTarget = h1; // Set initial target
+        startPatrol(h1); // Start walking immediately
+    }
 }

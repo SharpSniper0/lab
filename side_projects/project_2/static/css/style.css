@@ -313,73 +313,167 @@ nav {
     overflow: visible;
 }
 
-/* Limbs */
-.arms line {
-    transform-origin: 32px 38px;
-}
-
-.legs line {
-    transform-origin: 32px 60px;
-}
-
-/* States */
-.sitting .legs .limb-left {
-    transform: rotate(-80deg);
-}
-
-.sitting .legs .limb-right {
-    transform: rotate(-100deg) translate(5px, -5px);
-}
-
-.sitting .arms .limb-left {
-    transform: rotate(40deg);
-}
-
-.sitting .arms .limb-right {
-    transform: rotate(-40deg);
-}
-
-.jumping-arc {
-    animation: jumpArc 0.7s ease-in-out;
-}
-
-@keyframes jumpArc {
+/* --- Parkour Bot Interactions --- */
+/* Walking (The Henry Strut) */
+@keyframes walkLegs {
     0% {
-        transform: scaleY(0.8) translateY(0);
-    }
-
-    10% {
-        transform: scaleY(1.1) translateY(-10px);
+        transform: rotate(-25deg);
     }
 
     50% {
-        transform: translateY(-80px) rotate(5deg);
-    }
-
-    80% {
-        transform: translateY(-10px) rotate(-2deg);
+        transform: rotate(25deg);
     }
 
     100% {
-        transform: scaleY(1) translateY(0) rotate(0);
+        transform: rotate(-25deg);
     }
 }
 
-/* Flip (Click) */
-.flip {
-    animation: doFlip 0.8s ease-out;
+@keyframes walkKnees {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(30deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
-@keyframes doFlip {
+@keyframes walkArms {
     0% {
-        transform: translateY(0) rotate(0);
+        transform: rotate(25deg);
+    }
+
+    50% {
+        transform: rotate(-25deg);
+    }
+
+    100% {
+        transform: rotate(25deg);
+    }
+}
+
+@keyframes bob {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.walking svg {
+    animation: bob 0.6s infinite ease-in-out;
+}
+
+.walking .left-leg {
+    animation: walkLegs 0.8s infinite linear;
+}
+
+.walking .right-leg {
+    animation: walkLegs 0.8s infinite linear reverse;
+}
+
+.walking .right-leg .shin-group {
+    animation: walkKnees 0.8s infinite linear reverse;
+}
+
+.walking .left-leg .shin-group {
+    animation: walkKnees 0.8s infinite linear;
+}
+
+.walking .left-arm {
+    animation: walkArms 0.8s infinite linear reverse;
+}
+
+.walking .right-arm {
+    animation: walkArms 0.8s infinite linear;
+}
+
+/* Sitting State */
+.sitting .left-leg {
+    transform: rotate(-80deg);
+    transition: 0.3s;
+}
+
+.sitting .right-leg {
+    transform: rotate(-90deg);
+    transition: 0.3s;
+}
+
+.sitting .shin-group {
+    transform: rotate(90deg) translate(2px, 2px);
+    transition: 0.3s;
+}
+
+.sitting .left-arm {
+    transform: rotate(30deg);
+    transition: 0.3s;
+}
+
+.sitting .right-arm {
+    transform: rotate(-30deg);
+    transition: 0.3s;
+}
+
+.sitting .forearm-group {
+    transform: rotate(-45deg);
+    transition: 0.3s;
+}
+
+/* Jumping State */
+.jumping-arc .left-leg {
+    transform: rotate(-20deg);
+    transition: 0.1s;
+}
+
+.jumping-arc .right-leg {
+    transform: rotate(45deg);
+    transition: 0.1s;
+}
+
+.jumping-arc .left-arm {
+    transform: rotate(-130deg);
+    transition: 0.1s;
+}
+
+.jumping-arc .right-arm {
+    transform: rotate(-130deg);
+    transition: 0.1s;
+}
+
+/* Jump Animation */
+.jumping-arc {
+    animation: jumpPhysics 0.6s cubic-bezier(0.5, 0, 0.5, 1) forwards;
+}
+
+@keyframes jumpPhysics {
+    0% {
+        transform: translateY(0) scaleY(0.9);
     }
 
     40% {
-        transform: translateY(-150px) rotate(180deg);
+        transform: translateY(-120px) rotate(5deg) scaleY(1.05);
     }
 
     100% {
-        transform: translateY(0) rotate(360deg);
+        transform: translateY(0) rotate(0) scaleY(1);
     }
 }
