@@ -1,6 +1,805 @@
 {
     "eras": [
         {
+            "id": "tulip_mania",
+            "name": "Tulip Mania (1636-1637)",
+            "year_start": 1636,
+            "year_end": 1637,
+            "description": "The Golden Age of Dutch trade. Bulbs are worth more than houses. Are you a speculative genius?",
+            "assets": [
+                {
+                    "ticker": "SMPR",
+                    "name": "Semper Augustus Bulb",
+                    "sector": "Luxury",
+                    "type": "Bulb",
+                    "fate": "Crash"
+                },
+                {
+                    "ticker": "VICR",
+                    "name": "Viceroy Bulb",
+                    "sector": "Luxury",
+                    "type": "Bulb",
+                    "fate": "Crash"
+                },
+                {
+                    "ticker": "ADM",
+                    "name": "Admiral Van Der Eijck",
+                    "sector": "Luxury",
+                    "type": "Bulb",
+                    "fate": "Crash"
+                },
+                {
+                    "ticker": "GOUDA",
+                    "name": "Gouda Cheese Co.",
+                    "sector": "Staples",
+                    "type": "Commodity"
+                },
+                {
+                    "ticker": "VOC",
+                    "name": "Dutch East India Co.",
+                    "sector": "Shipping",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "LAND",
+                    "name": "Amsterdam Real Estate",
+                    "sector": "Real Estate",
+                    "type": "Property"
+                },
+                {
+                    "ticker": "SHIP",
+                    "name": "Ship Cargo Insurance",
+                    "sector": "Finance",
+                    "type": "Bond"
+                },
+                {
+                    "ticker": "WHEAT",
+                    "name": "Wheat Futures",
+                    "sector": "Commodity",
+                    "type": "Commodity"
+                }
+            ],
+            "market_data": {
+                "timestamps": [
+                    "Nov 1636",
+                    "Dec 1636",
+                    "Jan 1637",
+                    "Feb 1 1637",
+                    "Feb 5 1637",
+                    "Feb 15 1637",
+                    "Mar 1637",
+                    "Apr 1637",
+                    "May 1637"
+                ],
+                "prices": {
+                    "SMPR": [
+                        1000,
+                        2000,
+                        5500,
+                        10000,
+                        500,
+                        250,
+                        100,
+                        80,
+                        50
+                    ],
+                    "VICR": [
+                        500,
+                        1500,
+                        3000,
+                        4200,
+                        200,
+                        100,
+                        50,
+                        40,
+                        20
+                    ],
+                    "ADM": [
+                        300,
+                        800,
+                        1500,
+                        2500,
+                        800,
+                        100,
+                        10,
+                        8,
+                        5
+                    ],
+                    "GOUDA": [
+                        10,
+                        10,
+                        11,
+                        12,
+                        12,
+                        12,
+                        12,
+                        13,
+                        13
+                    ],
+                    "VOC": [
+                        150,
+                        155,
+                        160,
+                        158,
+                        140,
+                        135,
+                        130,
+                        140,
+                        145
+                    ],
+                    "LAND": [
+                        500,
+                        510,
+                        520,
+                        530,
+                        525,
+                        522,
+                        520,
+                        525,
+                        530
+                    ],
+                    "SHIP": [
+                        50,
+                        52,
+                        55,
+                        58,
+                        40,
+                        38,
+                        35,
+                        40,
+                        45
+                    ],
+                    "WHEAT": [
+                        5,
+                        5,
+                        5,
+                        6,
+                        6,
+                        6,
+                        6,
+                        6,
+                        6
+                    ]
+                }
+            },
+            "events": [
+                {
+                    "date": "Jan 1637",
+                    "title": "The Tavern Auctions",
+                    "description": "Frenzy in the taverns of Haarlem. A single Semper Augustus sells for the price of a mansion."
+                },
+                {
+                    "date": "Feb 5 1637",
+                    "title": "The Bubble Bursts",
+                    "description": "At an auction in Haarlem, no buyers appear. Panic spreads instantly across the Netherlands."
+                }
+            ]
+        },
+        {
+            "id": "south_sea_bubble",
+            "name": "The South Sea Bubble (1720)",
+            "year_start": 1720,
+            "year_end": 1721,
+            "description": "The first modern stock market crash. Even Isaac Newton lost a fortune. Can you outsmart the hype?",
+            "assets": [
+                {
+                    "ticker": "SSC",
+                    "name": "South Sea Company",
+                    "sector": "Shipping",
+                    "type": "Stock",
+                    "fate": "Crash"
+                },
+                {
+                    "ticker": "MS",
+                    "name": "Mississippi Company",
+                    "sector": "Shipping",
+                    "type": "Stock",
+                    "fate": "Crash"
+                },
+                {
+                    "ticker": "ROYAL",
+                    "name": "Royal Exchange",
+                    "sector": "Insurance",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "BANK",
+                    "name": "Bank of England",
+                    "sector": "Finance",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "SWORD",
+                    "name": "Hollow Sword Blade Co",
+                    "sector": "Finance",
+                    "type": "Stock",
+                    "fate": "Bankrupt"
+                }
+            ],
+            "market_data": {
+                "timestamps": [
+                    "Jan 1720",
+                    "Mar 1720",
+                    "Apr 1720",
+                    "May 1720",
+                    "Jun 1720",
+                    "Jul 1720",
+                    "Aug 1720",
+                    "Sep 1720",
+                    "Oct 1720",
+                    "Nov 1720",
+                    "Dec 1720"
+                ],
+                "prices": {
+                    "SSC": [
+                        128,
+                        330,
+                        400,
+                        550,
+                        890,
+                        950,
+                        1000,
+                        175,
+                        150,
+                        135,
+                        124
+                    ],
+                    "MS": [
+                        500,
+                        1200,
+                        1800,
+                        2500,
+                        6000,
+                        7000,
+                        8000,
+                        2000,
+                        1000,
+                        800,
+                        500
+                    ],
+                    "ROYAL": [
+                        10,
+                        12,
+                        14,
+                        15,
+                        25,
+                        28,
+                        30,
+                        10,
+                        9,
+                        8,
+                        8
+                    ],
+                    "BANK": [
+                        150,
+                        160,
+                        180,
+                        200,
+                        240,
+                        250,
+                        260,
+                        200,
+                        180,
+                        160,
+                        150
+                    ],
+                    "SWORD": [
+                        50,
+                        80,
+                        100,
+                        150,
+                        300,
+                        350,
+                        400,
+                        30,
+                        20,
+                        15,
+                        10
+                    ]
+                }
+            },
+            "events": [
+                {
+                    "date": "Jun 1720",
+                    "title": "The Bubble Act",
+                    "description": "Parliament passes act to restrict new joint-stock companies, inadvertently popping the bubble."
+                },
+                {
+                    "date": "Aug 1720",
+                    "title": "Insiders Sell",
+                    "description": "SSC directors sell their shares. Panic ensues."
+                }
+            ]
+        },
+        {
+            "id": "great_depression",
+            "name": "The Great Crash (1929)",
+            "year_start": 1929,
+            "year_end": 1932,
+            "description": "The Roaring Twenties come to a screeching halt. The market loses 89% of its value.",
+            "assets": [
+                {
+                    "ticker": "RCA",
+                    "name": "Radio Corp of America",
+                    "sector": "Tech",
+                    "type": "Stock",
+                    "fate": "Crash"
+                },
+                {
+                    "ticker": "GM",
+                    "name": "General Motors",
+                    "sector": "Auto",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "X",
+                    "name": "U.S. Steel",
+                    "sector": "Industrial",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "DJIA",
+                    "name": "Dow Jones",
+                    "sector": "Index",
+                    "type": "Index"
+                },
+                {
+                    "ticker": "BOND",
+                    "name": "Government Bonds",
+                    "sector": "Bonds",
+                    "type": "Bond"
+                },
+                {
+                    "ticker": "CASH",
+                    "name": "USD Cash",
+                    "sector": "Forex",
+                    "type": "Cash"
+                }
+            ],
+            "market_data": {
+                "timestamps": [
+                    "Q1 1929",
+                    "Q2 1929",
+                    "Q3 1929",
+                    "Oct 1929",
+                    "Nov 1929",
+                    "Dec 1929",
+                    "Q1 1930",
+                    "Q2 1930",
+                    "Q3 1930",
+                    "Q4 1930",
+                    "1931",
+                    "1932"
+                ],
+                "prices": {
+                    "RCA": [
+                        350,
+                        400,
+                        500,
+                        300,
+                        100,
+                        50,
+                        45,
+                        40,
+                        35,
+                        30,
+                        20,
+                        10
+                    ],
+                    "GM": [
+                        70,
+                        80,
+                        90,
+                        70,
+                        50,
+                        40,
+                        38,
+                        35,
+                        32,
+                        28,
+                        25,
+                        10
+                    ],
+                    "X": [
+                        200,
+                        230,
+                        260,
+                        200,
+                        180,
+                        150,
+                        145,
+                        140,
+                        130,
+                        120,
+                        100,
+                        40
+                    ],
+                    "DJIA": [
+                        300,
+                        340,
+                        381,
+                        299,
+                        230,
+                        248,
+                        260,
+                        230,
+                        210,
+                        190,
+                        100,
+                        41
+                    ],
+                    "BOND": [
+                        100,
+                        98,
+                        95,
+                        102,
+                        105,
+                        110,
+                        112,
+                        115,
+                        118,
+                        120,
+                        125,
+                        130
+                    ],
+                    "CASH": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            },
+            "events": [
+                {
+                    "date": "Q3 1929",
+                    "title": "Market Peak",
+                    "description": "The Dow hits 381. Economists predict a 'permanently high plateau'."
+                },
+                {
+                    "date": "Oct 1929",
+                    "title": "Black Tuesday",
+                    "description": "16 million shares traded. The market collapses."
+                }
+            ]
+        },
+        {
+            "id": "japan_bubble",
+            "name": "The Lost Decade (Japan 1989)",
+            "year_start": 1989,
+            "year_end": 1992,
+            "description": "Tokyo's Imperial Palace grounds are worth more than all of California. The Nikkei is unstoppable... right?",
+            "assets": [
+                {
+                    "ticker": "N225",
+                    "name": "Nikkei 225",
+                    "sector": "Index",
+                    "type": "Index"
+                },
+                {
+                    "ticker": "SONY",
+                    "name": "Sony Corp",
+                    "sector": "Tech",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "TOY",
+                    "name": "Toyota Motor",
+                    "sector": "Auto",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "NTT",
+                    "name": "Nippon Telegraph",
+                    "sector": "Telco",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "REAL",
+                    "name": "Tokyo Real Estate",
+                    "sector": "Property",
+                    "type": "Property",
+                    "fate": "Crash"
+                },
+                {
+                    "ticker": "USDK",
+                    "name": "USD Currency",
+                    "sector": "Forex",
+                    "type": "Forex"
+                },
+                {
+                    "ticker": "GOLD",
+                    "name": "Gold",
+                    "sector": "Commodity",
+                    "type": "Commodity"
+                }
+            ],
+            "market_data": {
+                "timestamps": [
+                    "Q1 1989",
+                    "Q2 1989",
+                    "Q3 1989",
+                    "Q4 1989",
+                    "Q1 1990",
+                    "Q2 1990",
+                    "Q3 1990",
+                    "Q4 1990",
+                    "Q1 1991",
+                    "Q2 1991",
+                    "Q3 1991",
+                    "Q4 1991",
+                    "1992"
+                ],
+                "prices": {
+                    "N225": [
+                        30000,
+                        32000,
+                        34000,
+                        38915,
+                        37000,
+                        32000,
+                        28000,
+                        23000,
+                        22000,
+                        21000,
+                        20000,
+                        19000,
+                        16000
+                    ],
+                    "SONY": [
+                        5000,
+                        5500,
+                        6000,
+                        7500,
+                        7000,
+                        6000,
+                        5000,
+                        4500,
+                        4200,
+                        4100,
+                        4000,
+                        3800,
+                        3500
+                    ],
+                    "TOY": [
+                        1500,
+                        1600,
+                        1800,
+                        2200,
+                        2000,
+                        1800,
+                        1600,
+                        1500,
+                        1450,
+                        1420,
+                        1400,
+                        1300,
+                        1200
+                    ],
+                    "NTT": [
+                        2000,
+                        2200,
+                        2500,
+                        3000,
+                        2500,
+                        2000,
+                        1800,
+                        1500,
+                        1200,
+                        1100,
+                        1000,
+                        900,
+                        800
+                    ],
+                    "REAL": [
+                        100,
+                        110,
+                        120,
+                        150,
+                        140,
+                        110,
+                        90,
+                        80,
+                        70,
+                        65,
+                        60,
+                        50,
+                        40
+                    ],
+                    "USDK": [
+                        125,
+                        128,
+                        130,
+                        140,
+                        145,
+                        150,
+                        145,
+                        135,
+                        132,
+                        131,
+                        130,
+                        128,
+                        125
+                    ],
+                    "GOLD": [
+                        400,
+                        390,
+                        380,
+                        410,
+                        420,
+                        390,
+                        380,
+                        370,
+                        360,
+                        355,
+                        350,
+                        345,
+                        340
+                    ]
+                }
+            },
+            "events": [
+                {
+                    "date": "Q4 1989",
+                    "title": "Nikkei Hits All-Time High",
+                    "description": "The index peaks at 38,915. Champagne flows in Ginza."
+                },
+                {
+                    "date": "Q1 1990",
+                    "title": "The Crash Begins",
+                    "description": "The Bank of Japan sharply raises rates. The asset bubble pops violently."
+                }
+            ]
+        },
+        {
+            "id": "asian_crisis",
+            "name": "Asian Financial Crisis (1997)",
+            "year_start": 1997,
+            "year_end": 1998,
+            "description": "The 'Asian Tigers' are roaring, until the Thai Baht collapses. Contagion spreads across the Pacific.",
+            "assets": [
+                {
+                    "ticker": "THB",
+                    "name": "Thai Baht",
+                    "sector": "Forex",
+                    "type": "Forex",
+                    "fate": "Crash"
+                },
+                {
+                    "ticker": "KRW",
+                    "name": "Korean Won",
+                    "sector": "Forex",
+                    "type": "Forex",
+                    "fate": "Crash"
+                },
+                {
+                    "ticker": "HSBC",
+                    "name": "HSBC Holdings",
+                    "sector": "Finance",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "SAMSUNG",
+                    "name": "Samsung Elec",
+                    "sector": "Tech",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "SPY",
+                    "name": "S&P 500 (US)",
+                    "sector": "Index",
+                    "type": "Index"
+                },
+                {
+                    "ticker": "GOLD",
+                    "name": "Gold",
+                    "sector": "Commodity",
+                    "type": "Commodity"
+                }
+            ],
+            "market_data": {
+                "timestamps": [
+                    "Q1 1997",
+                    "Q2 1997",
+                    "Jul 1997",
+                    "Q3 1997",
+                    "Oct 1997",
+                    "Nov 1997",
+                    "Dec 1997",
+                    "Q1 1998",
+                    "Q2 1998"
+                ],
+                "prices": {
+                    "THB": [
+                        25,
+                        25.5,
+                        30,
+                        35,
+                        40,
+                        48,
+                        55,
+                        52,
+                        45
+                    ],
+                    "KRW": [
+                        850,
+                        875,
+                        900,
+                        925,
+                        1000,
+                        1200,
+                        1700,
+                        1600,
+                        1400
+                    ],
+                    "HSBC": [
+                        15,
+                        16,
+                        18,
+                        19,
+                        12,
+                        11,
+                        10,
+                        10,
+                        11
+                    ],
+                    "SAMSUNG": [
+                        50,
+                        52,
+                        55,
+                        50,
+                        30,
+                        28,
+                        25,
+                        28,
+                        35
+                    ],
+                    "SPY": [
+                        75,
+                        78,
+                        80,
+                        85,
+                        85,
+                        90,
+                        95,
+                        100,
+                        105
+                    ],
+                    "GOLD": [
+                        350,
+                        345,
+                        340,
+                        330,
+                        320,
+                        300,
+                        290,
+                        295,
+                        300
+                    ]
+                }
+            },
+            "events": [
+                {
+                    "date": "Jul 1997",
+                    "title": "Baht Devaluation",
+                    "description": "Thailand unpegs from the dollar. The currency freefalls."
+                },
+                {
+                    "date": "Oct 1997",
+                    "title": "Contagion Reaches Hong Kong",
+                    "description": "Stock markets across Asia plummet. The IMF steps in."
+                }
+            ]
+        },
+        {
             "id": "dotcom_bubble",
             "name": "The Dot-Com Bubble (1999-2002)",
             "year_start": 1999,
@@ -27,6 +826,36 @@
                     "fate": "Bankrupt"
                 },
                 {
+                    "ticker": "QCOM",
+                    "name": "Qualcomm",
+                    "sector": "Tech",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "EBAY",
+                    "name": "eBay Inc.",
+                    "sector": "Tech",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "YHOO",
+                    "name": "Yahoo!",
+                    "sector": "Tech",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "MSFT",
+                    "name": "Microsoft",
+                    "sector": "Tech",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "INTC",
+                    "name": "Intel",
+                    "sector": "Tech",
+                    "type": "Stock"
+                },
+                {
                     "ticker": "SPY",
                     "name": "S&P 500 ETF",
                     "sector": "Index",
@@ -37,74 +866,276 @@
                     "name": "Gold",
                     "sector": "Commodity",
                     "type": "Commodity"
+                },
+                {
+                    "ticker": "KO",
+                    "name": "Coca-Cola",
+                    "sector": "Staples",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "JNJ",
+                    "name": "Johnson & Johnson",
+                    "sector": "Health",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "GE",
+                    "name": "General Electric",
+                    "sector": "Industrial",
+                    "type": "Stock"
                 }
             ],
             "market_data": {
                 "timestamps": [
-                    "1999-01",
-                    "1999-06",
-                    "2000-01",
-                    "2000-03",
-                    "2000-06",
-                    "2001-01",
-                    "2002-01"
+                    "Q1 99",
+                    "Q2 99",
+                    "Q3 99",
+                    "Q4 99",
+                    "Q1 00",
+                    "Mar 00",
+                    "Q2 00",
+                    "Q3 00",
+                    "Nov 00",
+                    "Q4 00",
+                    "Q1 01",
+                    "Q2 01",
+                    "Q3 01",
+                    "Q4 01",
+                    "2002"
                 ],
                 "prices": {
                     "AMZN": [
                         60,
+                        70,
                         85,
+                        90,
                         95,
                         105,
+                        75,
+                        60,
+                        40,
                         50,
+                        30,
+                        20,
                         15,
+                        12,
                         10
                     ],
                     "CSCO": [
                         40,
+                        45,
                         55,
+                        65,
                         70,
                         80,
+                        70,
+                        65,
                         60,
+                        50,
+                        40,
+                        35,
                         30,
+                        20,
                         15
                     ],
                     "PETS": [
                         10,
+                        11,
                         12,
+                        13,
                         14,
                         11,
+                        8,
+                        5,
                         2,
+                        0,
+                        0,
+                        0,
+                        0,
                         0,
                         0
                     ],
+                    "QCOM": [
+                        15,
+                        30,
+                        50,
+                        100,
+                        150,
+                        200,
+                        150,
+                        120,
+                        100,
+                        80,
+                        60,
+                        50,
+                        40,
+                        35,
+                        30
+                    ],
+                    "EBAY": [
+                        30,
+                        45,
+                        60,
+                        75,
+                        90,
+                        100,
+                        80,
+                        70,
+                        60,
+                        50,
+                        40,
+                        35,
+                        30,
+                        32,
+                        35
+                    ],
+                    "YHOO": [
+                        80,
+                        110,
+                        150,
+                        220,
+                        300,
+                        475,
+                        350,
+                        280,
+                        200,
+                        100,
+                        80,
+                        60,
+                        50,
+                        40,
+                        30
+                    ],
+                    "MSFT": [
+                        40,
+                        45,
+                        50,
+                        55,
+                        58,
+                        55,
+                        48,
+                        45,
+                        40,
+                        38,
+                        35,
+                        32,
+                        30,
+                        28,
+                        25
+                    ],
+                    "INTC": [
+                        30,
+                        35,
+                        40,
+                        50,
+                        60,
+                        75,
+                        68,
+                        65,
+                        60,
+                        50,
+                        45,
+                        42,
+                        40,
+                        35,
+                        30
+                    ],
                     "SPY": [
                         120,
+                        125,
                         130,
+                        135,
                         145,
                         150,
+                        145,
+                        142,
                         140,
+                        130,
+                        125,
                         120,
+                        115,
+                        110,
                         100
                     ],
                     "GLD": [
                         280,
+                        270,
                         260,
+                        270,
                         280,
                         290,
+                        285,
+                        282,
                         280,
+                        275,
+                        270,
+                        268,
                         265,
+                        280,
                         300
+                    ],
+                    "KO": [
+                        60,
+                        59,
+                        58,
+                        55,
+                        50,
+                        45,
+                        48,
+                        50,
+                        52,
+                        53,
+                        54,
+                        55,
+                        56,
+                        50,
+                        48
+                    ],
+                    "JNJ": [
+                        40,
+                        42,
+                        45,
+                        42,
+                        40,
+                        35,
+                        38,
+                        40,
+                        42,
+                        45,
+                        46,
+                        47,
+                        48,
+                        50,
+                        55
+                    ],
+                    "GE": [
+                        30,
+                        35,
+                        40,
+                        45,
+                        50,
+                        60,
+                        58,
+                        56,
+                        55,
+                        50,
+                        48,
+                        46,
+                        45,
+                        40,
+                        35
                     ]
                 }
             },
             "events": [
                 {
-                    "date": "2000-03",
+                    "date": "Mar 00",
                     "title": "NASDAQ Peaks",
                     "description": "The tech heavy index hits an all-time high of 5,048."
                 },
                 {
-                    "date": "2000-11",
+                    "date": "Nov 00",
                     "title": "Pets.com Collapses",
                     "description": "The poster child of the bubble goes under just 9 months after IPO."
                 }
@@ -125,8 +1156,46 @@
                     "fate": "Bankrupt"
                 },
                 {
+                    "ticker": "BSC",
+                    "name": "Bear Stearns",
+                    "sector": "Finance",
+                    "type": "Stock",
+                    "fate": "Acquired"
+                },
+                {
+                    "ticker": "AIG",
+                    "name": "AIG Insurance",
+                    "sector": "Finance",
+                    "type": "Stock",
+                    "fate": "Bailed Out"
+                },
+                {
+                    "ticker": "C",
+                    "name": "Citigroup",
+                    "sector": "Finance",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "BAC",
+                    "name": "Bank of America",
+                    "sector": "Finance",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "GS",
+                    "name": "Goldman Sachs",
+                    "sector": "Finance",
+                    "type": "Stock"
+                },
+                {
                     "ticker": "AAPL",
                     "name": "Apple",
+                    "sector": "Tech",
+                    "type": "Stock"
+                },
+                {
+                    "ticker": "AMZN",
+                    "name": "Amazon",
                     "sector": "Tech",
                     "type": "Stock"
                 },
@@ -141,57 +1210,148 @@
                     "name": "Treasury Bonds",
                     "sector": "Bonds",
                     "type": "Bond"
+                },
+                {
+                    "ticker": "GLD",
+                    "name": "Gold",
+                    "sector": "Commodity",
+                    "type": "Commodity"
                 }
             ],
             "market_data": {
                 "timestamps": [
-                    "2007-06",
-                    "2007-12",
-                    "2008-03",
-                    "2008-09",
-                    "2008-12",
-                    "2009-03"
+                    "Q2 07",
+                    "Q3 07",
+                    "Q4 07",
+                    "Mar 08",
+                    "Q2 08",
+                    "Sep 08",
+                    "Q4 08",
+                    "Q1 09"
                 ],
                 "prices": {
                     "LEH": [
                         75,
+                        70,
                         60,
                         40,
+                        20,
                         0,
                         0,
                         0
                     ],
+                    "BSC": [
+                        140,
+                        120,
+                        90,
+                        2,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "AIG": [
+                        1400,
+                        1200,
+                        1000,
+                        800,
+                        400,
+                        40,
+                        20,
+                        10
+                    ],
+                    "C": [
+                        500,
+                        400,
+                        300,
+                        200,
+                        180,
+                        150,
+                        50,
+                        10
+                    ],
+                    "BAC": [
+                        50,
+                        45,
+                        40,
+                        35,
+                        32,
+                        30,
+                        15,
+                        5
+                    ],
+                    "GS": [
+                        220,
+                        210,
+                        200,
+                        160,
+                        140,
+                        100,
+                        70,
+                        80
+                    ],
                     "AAPL": [
                         5,
+                        5.5,
                         6,
                         5,
+                        4.5,
                         4,
                         3,
                         3
                     ],
+                    "AMZN": [
+                        70,
+                        80,
+                        90,
+                        75,
+                        78,
+                        80,
+                        50,
+                        60
+                    ],
                     "SPY": [
                         150,
+                        145,
                         140,
                         130,
+                        125,
                         110,
                         90,
                         70
                     ],
                     "TLT": [
                         85,
+                        88,
                         90,
                         95,
+                        98,
                         100,
                         115,
                         120
+                    ],
+                    "GLD": [
+                        65,
+                        70,
+                        80,
+                        90,
+                        85,
+                        75,
+                        85,
+                        90
                     ]
                 }
             },
             "events": [
                 {
-                    "date": "2008-09",
-                    "title": "Lehman Brothers Files for Bankruptcy",
-                    "description": "The largest bankruptcy filing in U.S. history sends shockwaves."
+                    "date": "Mar 08",
+                    "title": "Bear Stearns Collapse",
+                    "description": "The investment bank is sold to JPMorgan for $2 a share."
+                },
+                {
+                    "date": "Sep 08",
+                    "title": "Lehman Brothers Bankruptcy",
+                    "description": "The largest bankruptcy filing in U.S. history sends shockwaves through the global system."
                 }
             ]
         }

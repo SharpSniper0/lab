@@ -145,20 +145,48 @@ function step() {
 
     // Check Events
     const events = simulationData.events;
+    // Find event that matches CURRENT timestamp
     const event = events.find(e => e.date === timestamp);
     if (event) {
         log(`EVENT: [${event.title}] - ${event.description}`);
+        showNews(event.title, event.description);
     }
 
     currentStep++;
 }
 
+function showNews(title, desc) {
+    const el = document.getElementById('news-banner');
+    document.getElementById('news-title').innerText = title;
+    document.getElementById('news-desc').innerText = desc;
+
+    el.classList.add('active');
+
+    // Pause briefly
+    if (interval) clearInterval(interval);
+
+    // Hide after 4s
+    setTimeout(() => {
+        el.classList.remove('active');
+        if (currentStep < simulationData.market_data.timestamps.length) {
+            interval = setInterval(step, 500);
+        }
+    }, 4000);
+}
+
 function log(msg) {
     const logDiv = document.getElementById('event-log');
-    const p = document.createElement('div');
-    p.innerText = "> " + msg;
-    p.style.marginBottom = "5px";
-    logDiv.prepend(p);
+
+    // Create new entry
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+
+    // Timestamp (Mock)
+    const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric", second: "numeric" });
+
+    entry.innerHTML = `<span class="log-time">[${time}]</span> <span class="log-msg">${msg}</span>`;
+
+    logDiv.prepend(entry);
 }
 
 

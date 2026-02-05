@@ -1,15 +1,16 @@
 :root {
-    --bg-color: #0b0f19;
-    --card-bg: #131722;
-    --text-primary: #d1d4dc;
-    --text-secondary: #787b86;
-    --accent-green: #00ff9d;
-    /* Profit */
+    /* Core Palette matching Project 2 */
+    --bg-color: #000000;
+    --card-bg: rgba(28, 28, 30, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #86868b;
+    --accent: #2997ff;
+    /* Apple Blue */
     --accent-red: #ff3b30;
-    /* Loss */
-    --grid-line: #2a2e39;
-    --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
-    --font-ui: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    --accent-green: #30d158;
+    --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
 }
 
 * {
@@ -21,59 +22,350 @@
 body {
     background-color: var(--bg-color);
     color: var(--text-primary);
-    font-family: var(--font-ui);
+    font-family: var(--font-stack);
     height: 100vh;
     overflow: hidden;
-    /* App feel */
+    perspective: 1000px;
 }
 
 a {
-    color: inherit;
+    color: var(--accent);
     text-decoration: none;
+    transition: 0.2s;
+}
+
+a:hover {
+    color: #fff;
 }
 
 /* --- Layout --- */
 .app-container {
     display: flex;
     height: 100vh;
+    background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
 }
 
-/* Sidebar (Controls) */
+/* Sidebar */
 .sidebar {
-    width: 350px;
-    background: var(--card-bg);
-    border-right: 1px solid var(--grid-line);
-    padding: 20px;
+    width: 380px;
+    background: rgba(20, 20, 20, 0.8);
+    border-right: 1px solid var(--glass-border);
+    padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 10;
+    height: 100vh;
 }
 
-.main-panel {
+/* Ensure asset list takes available space and scrolls */
+.card-assets {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    gap: 20px;
+    overflow: hidden;
+    min-height: 0;
 }
 
-/* --- Typography --- */
-h1,
-h2,
-h3 {
-    color: #fff;
-    font-weight: 600;
-}
-
-h1 {
+.sidebar h2 {
     font-size: 1.5rem;
-    letter-spacing: -0.5px;
+    font-weight: 700;
+    color: #fff;
 }
 
-.mono {
+.sidebar h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+}
+
+/* Components */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.asset-list-container {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+}
+
+.asset-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--glass-border);
+    transition: 0.2s;
+}
+
+.asset-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Sliders */
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--text-primary);
+    margin-top: -6px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+}
+
+/* --- Main Panel (3D) --- */
+.main-panel {
+    flex: 1;
+    position: relative;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    transform-style: preserve-3d;
+}
+
+.chart-wrapper {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    /* 3D Transform */
+    transform: rotateX(2deg);
+    transition: all 0.5s ease;
+}
+
+/* News Overlay */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* --- News UI Redesign --- */
+
+/* 1. Breaking News Banner (Slides down from top of chart) */
+.news-banner {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-150%);
+    /* Start hidden above */
+    background: rgba(40, 0, 0, 0.9);
+    border: 1px solid var(--accent-red);
+    border-radius: 99px;
+    padding: 12px 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    backdrop-filter: blur(10px);
+    max-width: 90%;
+    width: max-content;
+}
+
+.news-banner.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.news-icon {
+    color: var(--accent-red);
+    font-size: 1.2rem;
+    animation: pulseRed 1.5s infinite;
+}
+
+.news-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.news-headline {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.news-subtext {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+/* 2. Live Wire (Upgraded Event Log) */
+#event-log {
+    margin-top: 20px;
+    height: 180px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 15px;
     font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
+.log-entry {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: 10px;
+}
+
+.log-time {
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+.log-msg {
+    color: #ddd;
+}
+
+@keyframes pulseRed {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Timeline specific */
+.timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    padding: 80px;
+    overflow-y: auto;
+    height: 100vh;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.timeline-header {
+    grid-column: 1/-1;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.timeline-header h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(to bottom, #fff, #999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.era-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 40px;
+    cursor: pointer;
+    transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.era-card:hover {
+    border-color: var(--accent);
+    transform: scale(1.02);
+}
+
+.era-year {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 5rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.05);
+    font-family: var(--font-stack);
+}
+
+.era-card h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    z-index: 1;
+}
+
+.era-card p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    z-index: 1;
+}
+
+/* Buttons */
+.btn-primary {
+    background: #fff;
+    color: #000;
+    padding: 15px 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+/* Utility */
 .green {
     color: var(--accent-green);
 }
@@ -82,87 +374,7 @@ h1 {
     color: var(--accent-red);
 }
 
-/* --- Components --- */
-.card {
-    background: var(--bg-color);
-    border: 1px solid var(--grid-line);
-    border-radius: 4px;
-    /* Sharp corners for terminal feel */
-    padding: 15px;
-}
-
-/* Timeline Cards */
-.timeline-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 40px;
-    overflow-y: auto;
-    height: 100vh;
-}
-
-.era-card {
-    background: var(--card-bg);
-    border: 1px solid var(--grid-line);
-    padding: 30px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.era-card:hover {
-    border-color: var(--accent-green);
-}
-
-.era-year {
-    font-size: 3rem;
-    font-weight: 900;
-    opacity: 0.1;
-    position: absolute;
-    right: 20px;
-    top: 10px;
-}
-
-/* Simulation Controls */
-.asset-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid var(--grid-line);
-}
-
-input[type="range"] {
-    flex: 1;
-    margin: 0 15px;
-    accent-color: var(--text-primary);
-}
-
-.portfolio-value {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: right;
+.mono {
     font-family: var(--font-mono);
-}
-
-.btn {
-    background: var(--text-primary);
-    color: #000;
-    padding: 12px;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.btn:hover {
-    opacity: 0.9;
-}
-
-/* Chart Container */
-.chart-wrapper {
-    flex: 1;
-    background: var(--card-bg);
-    border: 1px solid var(--grid-line);
-    border-radius: 4px;
-    position: relative;
+    font-size: 0.9rem;
 }
