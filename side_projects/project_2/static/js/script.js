@@ -210,20 +210,26 @@ function initBot() {
         const rect = element.getBoundingClientRect();
         const scrollY = window.scrollY;
 
+        // --- Dynamic Landing Logic ---
+        const startLeft = parseFloat(bot.style.left) || 0;
+        const targetCenter = rect.left + (rect.width / 2);
+
         let endLeft;
-        const isTitle = element.tagName === 'H1';
-        if (isTitle) {
+
+        // If coming from Left -> Land on Left Edge (+20px)
+        // If coming from Right -> Land on Right Edge (-50px)
+        if (startLeft < targetCenter) {
             endLeft = rect.left + 20;
         } else {
-            endLeft = (rect.left + rect.width) - 60;
+            endLeft = (rect.left + rect.width) - 50;
         }
 
-        const startLeft = parseFloat(bot.style.left) || 0;
+        if (element.tagName === 'H1') endLeft = rect.left + 20;
+
         const startTop = parseFloat(bot.style.top) || 0;
+        const endTop = (rect.top + scrollY) - 35; // Flush
 
-        // HEIGHT FIX: -35px to sit flush
-        const endTop = (rect.top + scrollY) - 35;
-
+        // Face Movement Direction
         bot.style.transform = endLeft < startLeft ? 'scaleX(-1)' : 'scaleX(1)';
 
         const isFalling = endTop > (startTop + 100);
@@ -242,7 +248,7 @@ function initBot() {
 
             // QUIRKS
             if (element.classList.contains('video-card') || element.classList.contains('card')) {
-                if (Math.random() < 0.4) {
+                if (Math.random() < 0.6) {
                     bot.classList.remove('sitting');
                     bot.classList.add('action-clean-window');
                     setTimeout(() => {

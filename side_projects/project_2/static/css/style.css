@@ -17,11 +17,8 @@
     padding: 0;
 }
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-primary);
-    font-family: var(--font-stack);
-    line-height: 1.5;
+html {
+    scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
@@ -607,27 +604,24 @@ nav {
 }
 
 /* Action: Clean Window (Wiping Motion) */
+/* Action: Clean Window (Wiping Motion - Downwards) */
 @keyframes wipeWindowRight {
 
     0%,
     100% {
-        transform: rotate(-30deg);
+        transform: rotate(10deg);
     }
 
-    20% {
-        transform: rotate(-130deg);
+    25% {
+        transform: rotate(50deg) translate(0, 5px);
     }
 
-    40% {
-        transform: rotate(-90deg);
+    50% {
+        transform: rotate(20deg) translate(0, 2px);
     }
 
-    60% {
-        transform: rotate(-130deg);
-    }
-
-    80% {
-        transform: rotate(-90deg);
+    75% {
+        transform: rotate(50deg) translate(0, 5px);
     }
 }
 
