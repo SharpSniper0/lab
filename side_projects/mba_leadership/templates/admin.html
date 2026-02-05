@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <h1>Admin Panel</h1>
+    <p>Logged in as Administrator. <a href="{{ url_for('index') }}" target="_blank">View Site &rarr;</a></p>
+</section>
+
+<section class="editor-container">
+    <h2>Home Page</h2>
+    <form class="content-form">
+        <label>Headline</label>
+        <input type="text" name="home.headline" value="{{ content.home.headline }}"
+            style="width: 100%; padding: 10px; margin-bottom: 20px;">
+
+        <label>Intro (Narrative)</label>
+        <div class="ai-wrapper" style="position: relative;">
+            <textarea name="home.intro" id="intro-text">{{ content.home.intro }}</textarea>
+            <button type="button" class="btn btn-ai" onclick="refineText('intro-text')"
+                style="position: absolute; bottom: 20px; right: 20px;">✨ Refine with AI</button>
+        </div>
+    </form>
+</section>
+
+<section>
+    <h2>Case Studies</h2>
+    <div id="cases-container">
+        {% for case in content.cases %}
+        <div class="case-editor" style="border: 1px solid #eee; padding: 20px; margin-bottom: 20px;">
+            <h3>Case #{{ loop.index }}</h3>
+            <label>Title</label>
+            <input type="text" name="cases[{{ loop.index0 }}].title" value="{{ case.title }}"
+                style="width: 100%; padding: 5px; margin-bottom: 10px;">
+
+            <label>Context</label>
+            <textarea name="cases[{{ loop.index0 }}].context" style="height: 80px;">{{ case.context }}</textarea>
+
+            <label>Decision</label>
+            <textarea name="cases[{{ loop.index0 }}].decision" style="height: 80px;">{{ case.decision }}</textarea>
+
+            <label>Outcome</label>
+            <textarea name="cases[{{ loop.index0 }}].outcome" style="height: 80px;">{{ case.outcome }}</textarea>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<button class="btn" onclick="saveContent()"
+    style="background: var(--accent); position: fixed; bottom: 20px; right: 20px; padding: 15px 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">💾
+    Save Changes</button>
+
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+{% endblock %}

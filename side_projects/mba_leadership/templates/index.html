@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="hero">
+    <h1>{{ content.home.headline }}</h1>
+    <h3 style="color: var(--text-secondary); font-family: var(--font-sans); margin-top: -10px;">{{
+        content.home.subheadline }}</h3>
+    <p style="margin-top: 30px; font-size: 1.2rem; line-height: 1.8;">
+        {{ content.home.intro }}
+    </p>
+</section>
+
+<section id="cases">
+    <h2>Case Studies</h2>
+    <div class="case-grid">
+        {% for case in content.cases %}
+        <div class="case-card">
+            <h3>{{ case.title }}</h3>
+            <p><strong>Context:</strong> {{ case.context }}</p>
+            <p><strong>Decision:</strong> {{ case.decision }}</p>
+            <p><strong>Outcome:</strong> {{ case.outcome }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="memos">
+    <h2>Decision Memos</h2>
+    <p>Executive summaries of key strategic choices.</p>
+    {% if content.memos %}
+    {% for memo in content.memos %}
+    <div class="memo-preview">
+        <h3>{{ memo.title }}</h3>
+        <a href="#">Read Memo &rarr;</a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p style="opacity: 0.5;">No public memos available.</p>
+    {% endif %}
+</section>
+
+<section id="about">
+    <h2>About</h2>
+    <p>
+        My journey is defined not by titles, but by the problems I chose to own.
+        [Placeholder for detailed narrative - Edit in Admin Panel]
+    </p>
+</section>
+{% endblock %}

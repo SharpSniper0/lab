@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title|default("Leadership Portfolio") }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@700;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}" class="nav-logo">AM.</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#cases">Case Studies</a>
+            <a href="#memos">Memos</a>
+            <a href="{{ url_for('login') }}">Login</a>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer style="margin-top: 80px; padding-top: 40px; border-top: 1px solid #eee; color: #888; font-size: 0.8rem;">
+        &copy; 2026 Amay Maheshwari. Leadership Under Constraints.
+    </footer>
+</body>
+
+</html>

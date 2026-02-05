@@ -1,0 +1,17 @@
+{
+    "home": {
+        "headline": "Leadership in Ambiguity.",
+        "subheadline": "Driving value through judgment, empathy, and calculated risk.",
+        "intro": "I am an early-career professional focused on solving complex problems constraints. This site documents my decisions, mistakes, and growth."
+    },
+    "cases": [
+        {
+            "id": 1,
+            "title": "Supply Chain Pivot",
+            "context": "Rapid disruption of primary vendor during Q4.",
+            "decision": "Shifted to local supplier with 15% higher cost but 100% reliability.",
+            "outcome": "Maintained delivery schedule; retained key client account."
+        }
+    ],
+    "memos": []
+}
