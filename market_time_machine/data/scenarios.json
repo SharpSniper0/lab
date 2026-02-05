@@ -10,6 +10,7 @@
                 {
                     "ticker": "SMPR",
                     "name": "Semper Augustus Bulb",
+                    "description": "The most famous and expensive tulip bulb. Striped with red and white, it cost the price of a mansion.",
                     "sector": "Luxury",
                     "type": "Bulb",
                     "fate": "Crash"
@@ -17,6 +18,7 @@
                 {
                     "ticker": "VICR",
                     "name": "Viceroy Bulb",
+                    "description": "A high-tier bulb, famously traded for '2 lasts of wheat, 4 lasts of rye, 4 fat oxen...'",
                     "sector": "Luxury",
                     "type": "Bulb",
                     "fate": "Crash"
@@ -24,6 +26,7 @@
                 {
                     "ticker": "ADM",
                     "name": "Admiral Van Der Eijck",
+                    "description": "A popular mid-tier bulb. Speculators bought these in taverns by the basket.",
                     "sector": "Luxury",
                     "type": "Bulb",
                     "fate": "Crash"
@@ -31,30 +34,35 @@
                 {
                     "ticker": "GOUDA",
                     "name": "Gouda Cheese Co.",
+                    "description": "A staple Dutch export. People still need to eat when the market burns.",
                     "sector": "Staples",
                     "type": "Commodity"
                 },
                 {
                     "ticker": "VOC",
                     "name": "Dutch East India Co.",
+                    "description": "The world's first multinational corporation. A safe haven compared to flowers.",
                     "sector": "Shipping",
                     "type": "Stock"
                 },
                 {
                     "ticker": "LAND",
                     "name": "Amsterdam Real Estate",
+                    "description": "Property in the booming capital. Solid, but illiquid during a panic.",
                     "sector": "Real Estate",
                     "type": "Property"
                 },
                 {
                     "ticker": "SHIP",
                     "name": "Ship Cargo Insurance",
+                    "description": "Bonds paying out if ships return safely from the Indies.",
                     "sector": "Finance",
                     "type": "Bond"
                 },
                 {
                     "ticker": "WHEAT",
                     "name": "Wheat Futures",
+                    "description": "Basic grain. Prices fluctuate with harvest, not fashion.",
                     "sector": "Commodity",
                     "type": "Commodity"
                 }

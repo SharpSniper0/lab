@@ -31,10 +31,20 @@
                 <div id="asset-inputs">
                     {% for asset in era.assets %}
                     <div class="asset-row">
-                        <span class="mono">{{ asset.ticker }}</span>
-                        <input type="range" class="allocation-slider" data-ticker="{{ asset.ticker }}" min="0" max="100"
-                            value="0" oninput="updateAllocation()">
-                        <span class="mono val">0%</span>
+                        <div style="display:flex; align-items:center; gap:5px;">
+                            <span class="mono">{{ asset.ticker }}</span>
+                            <!-- Tooltip -->
+                            <div class="tooltip-container">
+                                <span class="info-icon">?</span>
+                                <div class="tooltip-text">{{ asset.description }}</div>
+                            </div>
+                        </div>
+
+                        <!-- Range -100 to 100 -->
+                        <input type="range" class="allocation-slider" data-ticker="{{ asset.ticker }}" min="-100"
+                            max="100" value="0" step="10" oninput="updateAllocation()">
+
+                        <span class="mono val" style="width: 45px; text-align: right;">0%</span>
                     </div>
                     {% endfor %}
                 </div>

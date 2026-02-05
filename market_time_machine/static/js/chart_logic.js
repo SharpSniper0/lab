@@ -54,32 +54,43 @@ async function init() {
 }
 
 function updateAllocation() {
-    let total = 0;
+    let totalUsed = 0;
     const sliders = document.querySelectorAll('.allocation-slider');
 
     sliders.forEach(slider => {
         let val = parseInt(slider.value);
         let ticker = slider.dataset.ticker;
 
-        // Simple clamp logic could go here to prevent > 100%
+        let label = slider.nextElementSibling;
+        label.innerText = val + "%";
 
-        slider.nextElementSibling.innerText = val + "%";
+        // Color Cues
+        if (val < 0) {
+            label.style.color = '#ff3b30'; // Red for Short
+        } else if (val > 0) {
+            label.style.color = '#30d158'; // Green for Long
+        } else {
+            label.style.color = '#666';
+        }
+
         allocation[ticker] = val / 100;
-        total += val;
+        totalUsed += Math.abs(val); // Capital used is absolute
     });
 
-    document.getElementById('total-alloc').innerText = total;
-    if (total > 100) document.getElementById('total-alloc').style.color = 'red';
+    document.getElementById('total-alloc').innerText = totalUsed;
+
+    if (totalUsed > 100) document.getElementById('total-alloc').style.color = '#ff3b30';
     else document.getElementById('total-alloc').style.color = '#666';
 }
 
 function startSimulation() {
     if (!simulationData) return;
 
-    // Check if allocation <= 100
-    let total = Object.values(allocation).reduce((a, b) => a + b, 0);
-    if (total > 1.0) {
-        log("ERROR: Allocation exceeds 100%");
+    // Check exposure
+    let totalExposure = Object.values(allocation).reduce((a, b) => a + Math.abs(b), 0);
+    if (totalExposure > 1.05) { // Slight buffer
+        log("ERROR: Exposure > 100%");
+        alert("You cannot invest more than 100% of your capital! Reduce leverage.");
         return;
     }
 
@@ -90,13 +101,8 @@ function startSimulation() {
     portfolioClean = 10000;
     clearInterval(interval);
 
-    // Initial Investment Distro
-    // We track "shares" effectively 
-    // For MVP: We just track % growth of each slice
-
-    // Run Loop
     log("Started simulation...");
-    interval = setInterval(step, 500); // 500ms per month
+    interval = setInterval(step, 500);
 }
 
 function step() {
@@ -115,22 +121,30 @@ function step() {
     if (currentStep === 0) {
         currentValue = 10000; // Start
     } else {
-        // This is a simplified calculation:
-        // Value = Sum (Initial Allocation $ * (CurrentPrice / StartPrice))
-        // Assumes "Buy and Hold" at Step 0
+        // Value = Cash + Positions
+        let totalExposure = 0;
 
         Object.keys(allocation).forEach(ticker => {
+            const ratio = allocation[ticker]; // e.g., -0.5 or 0.5
+            totalExposure += Math.abs(ratio);
+
             const startPrice = prices[ticker][0];
             const currentPrice = prices[ticker][currentStep];
-            const allocatedCash = 10000 * allocation[ticker];
+            const dollarsInvested = 10000 * Math.abs(ratio);
 
-            const positionValue = allocatedCash * (currentPrice / startPrice);
-            currentValue += positionValue;
+            if (ratio >= 0) {
+                // LONG
+                currentValue += dollarsInvested * (currentPrice / startPrice);
+            } else {
+                // SHORT
+                // Multiplier = 2 - (Current/Start). 
+                let multiplier = 2 - (currentPrice / startPrice);
+                currentValue += dollarsInvested * multiplier;
+            }
         });
 
-        // Add unallocated cash (assumed 0% growth)
-        let allocatedPercent = Object.values(allocation).reduce((a, b) => a + b, 0);
-        currentValue += 10000 * (1 - allocatedPercent);
+        // Add remaining cash
+        currentValue += 10000 * (1 - totalExposure);
     }
 
     // Update Chart
