@@ -25,10 +25,13 @@ class JsonDataProvider(DataProvider):
     """MVP: Loads data from local JSON files."""
     def __init__(self, data_path='data/scenarios.json'):
         self.data_path = os.path.join(os.path.dirname(__file__), data_path)
+
+    def _load_data(self):
         with open(self.data_path, 'r') as f:
-            self.data = json.load(f)
+            return json.load(f)
 
     def get_scenarios(self):
+        data = self._load_data()
         # Return summary list for the timeline
         return [
             {
@@ -38,11 +41,12 @@ class JsonDataProvider(DataProvider):
                 "year_end": era["year_end"],
                 "description": era["description"]
             }
-            for era in self.data["eras"]
+            for era in data["eras"]
         ]
 
     def get_era_data(self, era_id):
-        for era in self.data["eras"]:
+        data = self._load_data()
+        for era in data["eras"]:
             if era["id"] == era_id:
                 return era
         return None

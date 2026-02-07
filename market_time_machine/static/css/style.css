@@ -69,6 +69,13 @@ a:hover {
     min-height: 0;
 }
 
+#asset-inputs {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 10px;
+}
+
 .sidebar h2 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -105,9 +112,12 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 15px;
+    padding: 15px;
     border-bottom: 1px solid var(--glass-border);
     transition: 0.2s;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    margin-bottom: 8px;
 }
 
 .asset-row:hover {
@@ -376,180 +386,218 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .mono {
     font-family: var(--font-mono);
+}
 
-    /* --- Mobile Responsiveness --- */
-    @media (max-width: 900px) {
-        .app-container {
-            flex-direction: column-reverse;
-            /* Controls below chart */
-            height: auto;
-            min-height: 100vh;
-            overflow-y: visible;
-            /* Allow scrolling */
-        }
+/* --- Global Tooltip (JS Powered) --- */
+#global-tooltip {
+    position: fixed;
+    z-index: 10000;
+    background: #1c1c1e;
+    color: #eee;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    font-family: var(--font-stack);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    max-width: 280px;
+    top: 0;
+    left: 0;
+}
 
-        .sidebar {
-            width: 100%;
-            height: auto;
-            /* Remove fixed min-height, let content dictate */
-            border-right: none;
-            border-top: 1px solid var(--glass-border);
-            padding: 15px;
-            padding-bottom: 40px;
-            /* Safe area */
-            background: rgba(10, 10, 10, 0.95);
-            /* darker for separation */
-        }
+/* Tooltip Arrow */
+#global-tooltip::after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 6px;
+}
 
-        .main-panel {
-            padding: 10px;
-            width: 100%;
-            height: auto;
-            display: block;
-            /* Remove flex here to let chart sit naturally */
-        }
+/* Right-sided tooltip (arrow on left) */
+#global-tooltip.right-side::after {
+    top: 15px;
+    left: -12px;
+    border-color: transparent #444 transparent transparent;
+}
 
-        .chart-wrapper {
-            transform: none;
-            border-radius: 12px;
-            height: 350px;
-            /* Fixed height for consistency */
-            margin-bottom: 0;
-            width: 100%;
-        }
+/* Left-sided tooltip (arrow on right) */
+#global-tooltip.left-side::after {
+    top: 15px;
+    right: -12px;
+    border-color: transparent transparent transparent #444;
+}
 
-        /* Adjust News Banner */
-        .news-banner {
-            width: 92%;
-            padding: 8px 12px;
-            top: 10px;
-            flex-direction: row;
-            font-size: 0.85rem;
-        }
+#global-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        .news-headline {
-            font-size: 0.85rem;
-        }
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+    .app-container {
+        flex-direction: column-reverse;
+        /* Controls below chart */
+        height: auto;
+        min-height: 100vh;
+        overflow-y: visible;
+        /* Allow scrolling */
+    }
 
-        .news-subtext {
-            font-size: 0.7rem;
-        }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        /* Remove fixed min-height, let content dictate */
+        border-right: none;
+        border-top: 1px solid var(--glass-border);
+        padding: 15px;
+        padding-bottom: 40px;
+        /* Safe area */
+        background: rgba(10, 10, 10, 0.95);
+        /* darker for separation */
+    }
 
-        /* Timeline Grid */
-        .timeline-grid {
-            grid-template-columns: 1fr;
-            padding: 15px;
-            height: auto;
-            gap: 20px;
-        }
+    .main-panel {
+        padding: 10px;
+        width: 100%;
+        height: auto;
+        display: block;
+        /* Remove flex here to let chart sit naturally */
+    }
 
-        .timeline-header h1 {
-            font-size: 2rem;
-            margin-top: 40px;
-        }
+    .chart-wrapper {
+        transform: none;
+        border-radius: 12px;
+        height: 350px;
+        /* Fixed height for consistency */
+        margin-bottom: 0;
+        width: 100%;
+    }
 
-        .era-card {
-            height: 220px;
-            padding: 25px;
-        }
+    /* Adjust News Banner */
+    .news-banner {
+        width: 92%;
+        padding: 8px 12px;
+        top: 10px;
+        flex-direction: row;
+        font-size: 0.85rem;
+    }
 
-        .era-year {
-            font-size: 3.5rem;
-            top: 15px;
-            right: 20px;
-        }
+    .news-headline {
+        font-size: 0.85rem;
+    }
 
-        /* Asset List */
-        .card-assets {
-            max-height: none;
-            /* Expand fully */
-        }
+    .news-subtext {
+        font-size: 0.7rem;
+    }
+
+    /* Timeline Grid */
+    .timeline-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        height: auto;
+        gap: 20px;
+    }
+
+    .timeline-header h1 {
+        font-size: 2rem;
+        margin-top: 40px;
+    }
+
+    .era-card {
+        height: 220px;
+        padding: 25px;
+    }
+
+    .era-year {
+        font-size: 3.5rem;
+        top: 15px;
+        right: 20px;
+    }
+
+    /* Asset List */
+    .card-assets {
+        max-height: none;
+        /* Expand fully */
+    }
 
 
-        /* --- Glitched Currency Background --- */
-        .timeline-grid {
-            position: relative;
-            z-index: 10;
-        }
+    /* --- Global Tooltip (JS Powered) --- */
+    #global-tooltip {
+        position: fixed;
+        z-index: 10000;
+        background: #1c1c1e;
+        color: #eee;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid #444;
+        font-family: var(--font-stack);
+        font-size: 0.85rem;
+        line-height: 1.5;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        max-width: 280px;
+        top: 0;
+        left: 0;
+    }
 
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            /* Above body background */
-            overflow: hidden;
-            pointer-events: none;
-        }
+    /* Tooltip Arrow */
+    #global-tooltip::after {
+        content: "";
+        position: absolute;
+        border-style: solid;
+        border-width: 6px;
+    }
 
-        .currency-symbol {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.15);
-            font-family: var(--font-mono);
-            font-weight: 800;
-            user-select: none;
-            will-change: transform, opacity;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-        }
+    /* Right-sided tooltip (arrow on left) */
+    #global-tooltip.right-side::after {
+        top: 15px;
+        left: -12px;
+        border-color: transparent #444 transparent transparent;
+    }
 
-        @keyframes drift {
-            0% {
-                transform: translateY(110vh) rotate(0deg) scale(1);
-                opacity: 0;
-            }
+    /* Left-sided tooltip (arrow on right) */
+    #global-tooltip.left-side::after {
+        top: 15px;
+        right: -12px;
+        border-color: transparent transparent transparent #444;
+    }
 
-            15% {
-                opacity: 0.08;
-            }
+    #global-tooltip.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-            85% {
-                opacity: 0.08;
-            }
+    .tooltip-trigger {
+        cursor: help;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-            100% {
-                transform: translateY(-20vh) rotate(180deg) scale(1.2);
-                opacity: 0;
-            }
-        }
+    .info-icon {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 1px solid var(--text-secondary);
+        color: var(--text-secondary);
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 6px;
+        transition: 0.2s;
+        background: rgba(255, 255, 255, 0.05);
+    }
 
-        /* Glitch Frames */
-        @keyframes shatter {
-            0% {
-                transform: translate(0) skew(0deg);
-                clip-path: inset(0 0 0 0);
-            }
-
-            20% {
-                transform: translate(-2px, 2px) skew(10deg);
-                clip-path: inset(20% 0 30% 0);
-            }
-
-            40% {
-                transform: translate(2px, -2px) skew(-10deg);
-                clip-path: inset(10% 0 60% 0);
-            }
-
-            60% {
-                transform: translate(-2px, 0) skew(5deg);
-                clip-path: inset(40% 0 20% 0);
-            }
-
-            80% {
-                transform: translate(2px, 2px) skew(-5deg);
-                clip-path: inset(50% 0 10% 0);
-            }
-
-            100% {
-                transform: translate(0) skew(0deg);
-                clip-path: inset(0 0 0 0);
-            }
-        }
-
-        .currency-symbol.glitch {
-            animation: drift 20s linear infinite, shatter 3s infinite steps(10);
-            color: rgba(255, 59, 48, 0.15);
-            /* Red tint when glitching */
-            text-shadow: 2px 0 rgba(41, 151, 255, 0.2), -2px 0 rgba(255, 59, 48, 0.2);
-        }
+    .tooltip-trigger:hover .info-icon {
+        color: #fff;
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.2);
+    }
+}

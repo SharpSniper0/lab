@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Market Time Machine</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
@@ -28,43 +28,10 @@
         </div>
         {% endfor %}
     </div>
-    <div class="bg-animation" id="bg-animation"></div>
-
+    <!-- Clean background, no animation -->
     <script>
-        const symbols = ['$', '€', '£', '¥', '₿', '₹', '₽', '₩', '📉', 'percent'];
-        const container = document.getElementById('bg-animation');
-
-        function spawnSymbol() {
-            const el = document.createElement('div');
-            const sym = symbols[Math.floor(Math.random() * symbols.length)];
-            el.innerText = sym === 'percent' ? '%' : sym;
-            el.className = 'currency-symbol';
-
-            // Random positioning
-            el.style.left = Math.random() * 90 + 5 + 'vw'; // Avoid edges
-            el.style.fontSize = Math.floor(Math.random() * 150 + 50) + 'px'; // Huge
-
-            // Random Glitch Chance
-            if (Math.random() < 0.2) {
-                el.classList.add('glitch');
-            } else {
-                el.style.animation = `drift ${Math.floor(Math.random() * 20 + 20)}s linear infinite`;
-            }
-
-            container.appendChild(el);
-
-            // Cleanup
-            setTimeout(() => el.remove(), 40000);
-        }
-
-        // Fill screen initially
-        for (let i = 0; i < 12; i++) {
-            spawnSymbol();
-            container.lastChild.style.animationDelay = `-${Math.random() * 20}s`;
-        }
-
-        // Continual spawn
-        setInterval(spawnSymbol, 2500);
+        // Emergency cleanup for cached versions
+        document.querySelectorAll('.bg-animation, .currency-symbol, .particle').forEach(el => el.remove());
     </script>
 </body>
 

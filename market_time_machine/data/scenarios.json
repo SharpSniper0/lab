@@ -10,7 +10,7 @@
                 {
                     "ticker": "SMPR",
                     "name": "Semper Augustus Bulb",
-                    "description": "The most famous and expensive tulip bulb. Striped with red and white, it cost the price of a mansion.",
+                    "description": "THE apex luxury asset. Cost: 12 acres of land. Highly speculative. If the mood turns, this crashes first.",
                     "sector": "Luxury",
                     "type": "Bulb",
                     "fate": "Crash"
@@ -18,7 +18,7 @@
                 {
                     "ticker": "VICR",
                     "name": "Viceroy Bulb",
-                    "description": "A high-tier bulb, famously traded for '2 lasts of wheat, 4 lasts of rye, 4 fat oxen...'",
+                    "description": "Mid-tier nobility favorite. Traded for '2 lasts of wheat, 4 fat oxen'. High volatility expected.",
                     "sector": "Luxury",
                     "type": "Bulb",
                     "fate": "Crash"
@@ -26,7 +26,7 @@
                 {
                     "ticker": "ADM",
                     "name": "Admiral Van Der Eijck",
-                    "description": "A popular mid-tier bulb. Speculators bought these in taverns by the basket.",
+                    "description": "The 'People's Bulb'. Traded in taverns by drunk speculators. Extremely frothy volume.",
                     "sector": "Luxury",
                     "type": "Bulb",
                     "fate": "Crash"
@@ -34,35 +34,35 @@
                 {
                     "ticker": "GOUDA",
                     "name": "Gouda Cheese Co.",
-                    "description": "A staple Dutch export. People still need to eat when the market burns.",
+                    "description": "Stability play. Dutch people eat cheese regardless of flower prices. Low growth, low risk.",
                     "sector": "Staples",
                     "type": "Commodity"
                 },
                 {
                     "ticker": "VOC",
                     "name": "Dutch East India Co.",
-                    "description": "The world's first multinational corporation. A safe haven compared to flowers.",
+                    "description": "Blue-chip empire. Monopolizes spice trade. A safe haven if the domestic market collapses.",
                     "sector": "Shipping",
                     "type": "Stock"
                 },
                 {
                     "ticker": "LAND",
                     "name": "Amsterdam Real Estate",
-                    "description": "Property in the booming capital. Solid, but illiquid during a panic.",
+                    "description": "Prime canal-side property. Solid value, but illiquid. Prices may dip if speculators sell homes to cover bulb debts.",
                     "sector": "Real Estate",
                     "type": "Property"
                 },
                 {
                     "ticker": "SHIP",
                     "name": "Ship Cargo Insurance",
-                    "description": "Bonds paying out if ships return safely from the Indies.",
+                    "description": "High yield bonds. Pays out unless pirates or storms attack. Uncorrelated to flower mania.",
                     "sector": "Finance",
                     "type": "Bond"
                 },
                 {
                     "ticker": "WHEAT",
                     "name": "Wheat Futures",
-                    "description": "Basic grain. Prices fluctuate with harvest, not fashion.",
+                    "description": "Essential commodity. Prices are driven by harvest quality, not speculation. Hedge against chaos.",
                     "sector": "Commodity",
                     "type": "Commodity"
                 }
@@ -193,6 +193,7 @@
                 {
                     "ticker": "SSC",
                     "name": "South Sea Company",
+                    "description": "The 'ETF' of the bubble. State-backed monopoly. Produces nothing but hype.",
                     "sector": "Shipping",
                     "type": "Stock",
                     "fate": "Crash"
@@ -200,6 +201,7 @@
                 {
                     "ticker": "MS",
                     "name": "Mississippi Company",
+                    "description": "French equivalent. Rocketing on mythical Louisiana gold. Highly correlated to SSC.",
                     "sector": "Shipping",
                     "type": "Stock",
                     "fate": "Crash"
@@ -207,18 +209,21 @@
                 {
                     "ticker": "ROYAL",
                     "name": "Royal Exchange",
+                    "description": "Major insurer. Riding the mania's wave, but exposed to the crash.",
                     "sector": "Insurance",
                     "type": "Stock"
                 },
                 {
                     "ticker": "BANK",
                     "name": "Bank of England",
+                    "description": "The 'Old Lady'. Conservative lender. Hated by speculators, but durable.",
                     "sector": "Finance",
                     "type": "Stock"
                 },
                 {
                     "ticker": "SWORD",
                     "name": "Hollow Sword Blade Co",
+                    "description": "Shadow bank financing the bubble. Maximum risk, maximum leverage.",
                     "sector": "Finance",
                     "type": "Stock",
                     "fate": "Bankrupt"
@@ -329,6 +334,7 @@
                 {
                     "ticker": "RCA",
                     "name": "Radio Corp of America",
+                    "description": "The 'Tech stock' of 1929. Radio is the future, but valuations are detached from reality.",
                     "sector": "Tech",
                     "type": "Stock",
                     "fate": "Crash"
@@ -336,30 +342,35 @@
                 {
                     "ticker": "GM",
                     "name": "General Motors",
+                    "description": "The engine of America. Solid production, but cyclical. Will suffer if consumers stop buying cars.",
                     "sector": "Auto",
                     "type": "Stock"
                 },
                 {
                     "ticker": "X",
                     "name": "U.S. Steel",
+                    "description": "The backbone of infrastructure. Leader of the industrial economy. Highly sensitive to construction slowdowns.",
                     "sector": "Industrial",
                     "type": "Stock"
                 },
                 {
                     "ticker": "DJIA",
                     "name": "Dow Jones",
+                    "description": "The market average. Short this to bet on the end of the Roaring Twenties.",
                     "sector": "Index",
                     "type": "Index"
                 },
                 {
                     "ticker": "BOND",
                     "name": "Government Bonds",
+                    "description": "US Treasury Bonds. The ultimate safe haven. When stocks panic, money flees here.",
                     "sector": "Bonds",
                     "type": "Bond"
                 },
                 {
                     "ticker": "CASH",
                     "name": "USD Cash",
+                    "description": "King Cash. In a deflationary spiral, holding cash increases your purchasing power.",
                     "sector": "Forex",
                     "type": "Cash"
                 }
@@ -489,30 +500,35 @@
                 {
                     "ticker": "N225",
                     "name": "Nikkei 225",
+                    "description": "The symbol of Japan's economic miracle. Trading at 60x earnings. Is this sustainable?",
                     "sector": "Index",
                     "type": "Index"
                 },
                 {
                     "ticker": "SONY",
                     "name": "Sony Corp",
+                    "description": "Global tech giant. The Walkman is everywhere. A solid business, but caught in the bubble valuation.",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "TOY",
                     "name": "Toyota Motor",
+                    "description": "Efficient manufacturing perfection. Just-in-time production. A defensive play in an offensive market?",
                     "sector": "Auto",
                     "type": "Stock"
                 },
                 {
                     "ticker": "NTT",
                     "name": "Nippon Telegraph",
+                    "description": "The most valuable company in history (1989). Privatized and puffed up by retail speculation.",
                     "sector": "Telco",
                     "type": "Stock"
                 },
                 {
                     "ticker": "REAL",
                     "name": "Tokyo Real Estate",
+                    "description": "The Imperial Palace grounds > California? The epicenter of the bubble. Pure speculation.",
                     "sector": "Property",
                     "type": "Property",
                     "fate": "Crash"
@@ -520,12 +536,14 @@
                 {
                     "ticker": "USDK",
                     "name": "USD Currency",
+                    "description": "The almighty Dollar. If the Yen collapses or the bubble pops, capital might flow back West.",
                     "sector": "Forex",
                     "type": "Forex"
                 },
                 {
                     "ticker": "GOLD",
                     "name": "Gold",
+                    "description": "Traditional store of value. Ignored during the tech/real estate boom, but shines in crisis.",
                     "sector": "Commodity",
                     "type": "Commodity"
                 }
@@ -677,6 +695,7 @@
                 {
                     "ticker": "THB",
                     "name": "Thai Baht",
+                    "description": "The trigger. Pegged to the dollar, but under massive speculative attack. The dam is about to break.",
                     "sector": "Forex",
                     "type": "Forex",
                     "fate": "Crash"
@@ -684,6 +703,7 @@
                 {
                     "ticker": "KRW",
                     "name": "Korean Won",
+                    "description": "South Korea's industrial powerhouse engine. Highly leveraged chaebols make this currency vulnerable.",
                     "sector": "Forex",
                     "type": "Forex",
                     "fate": "Crash"
@@ -691,24 +711,28 @@
                 {
                     "ticker": "HSBC",
                     "name": "HSBC Holdings",
+                    "description": "The Dragon. Massive exposure to Asia, but a fortress balance sheet. Will it bend or break?",
                     "sector": "Finance",
                     "type": "Stock"
                 },
                 {
                     "ticker": "SAMSUNG",
                     "name": "Samsung Elec",
+                    "description": "The crown jewel of Korea. Even giants can fall when credit markets freeze.",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "SPY",
                     "name": "S&P 500 (US)",
+                    "description": "US Markets. Safe haven? Or will the 'Asian Flu' cross the Pacific?",
                     "sector": "Index",
                     "type": "Index"
                 },
                 {
                     "ticker": "GOLD",
                     "name": "Gold",
+                    "description": "The panic button. When currencies fail, gold remains.",
                     "sector": "Commodity",
                     "type": "Commodity"
                 }
@@ -817,18 +841,21 @@
                 {
                     "ticker": "AMZN",
                     "name": "Amazon.com",
+                    "description": "Books online? Losing money on every sale but making it up in volume. Visionary or delusion?",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "CSCO",
                     "name": "Cisco Systems",
+                    "description": "The plumbing of the Internet. Most valuable company in the world. Priced for infinite growth.",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "PETS",
                     "name": "Pets.com",
+                    "description": "Sock puppet mascot. IPO fever. No business model. The poster child of the bubble.",
                     "sector": "Tech",
                     "type": "Stock",
                     "fate": "Bankrupt"
@@ -836,60 +863,70 @@
                 {
                     "ticker": "QCOM",
                     "name": "Qualcomm",
+                    "description": "Mobile revolution leader. Stock up 2,600% in one year. Can trees grow to the sky?",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "EBAY",
                     "name": "eBay Inc.",
+                    "description": "Online auctions. Actually profitable! A rare unicorn in a field of donkeys.",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "YHOO",
                     "name": "Yahoo!",
+                    "description": "The portal to the web. Worth more than Disney and Boeing combined. Ad revenue is king... for now.",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "MSFT",
                     "name": "Microsoft",
+                    "description": "The Evil Empire. Facing antitrust lawsuits, but prints money. A mature tech giant.",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "INTC",
                     "name": "Intel",
+                    "description": "Inside everything. PC demand is insatiable. The hardware backbone.",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "SPY",
                     "name": "S&P 500 ETF",
+                    "description": "Diversified exposure. Dragged up by tech, but anchored by the 'Old Economy'.",
                     "sector": "Index",
                     "type": "Index"
                 },
                 {
                     "ticker": "GLD",
                     "name": "Gold",
+                    "description": "A 'barbarous relic'. Nobody wants gold when Nasdaq returns 80% a year.",
                     "sector": "Commodity",
                     "type": "Commodity"
                 },
                 {
                     "ticker": "KO",
                     "name": "Coca-Cola",
+                    "description": "Buffett's favorite. Boring, reliable, profitable. Ignored by the dot-com crowd.",
                     "sector": "Staples",
                     "type": "Stock"
                 },
                 {
                     "ticker": "JNJ",
                     "name": "Johnson & Johnson",
+                    "description": "Band-Aids and baby powder. A defensive fortress when the tech bubble bursts.",
                     "sector": "Health",
                     "type": "Stock"
                 },
                 {
                     "ticker": "GE",
                     "name": "General Electric",
+                    "description": "Jack Welch's conglomerate. Financial engineering + industrial might. The blue-chip of blue-chips.",
                     "sector": "Industrial",
                     "type": "Stock"
                 }
@@ -1159,6 +1196,7 @@
                 {
                     "ticker": "LEH",
                     "name": "Lehman Brothers",
+                    "description": "158-year-old bank. Highly leveraged in real estate. 'Too big to fail'... or is it?",
                     "sector": "Finance",
                     "type": "Stock",
                     "fate": "Bankrupt"
@@ -1166,6 +1204,7 @@
                 {
                     "ticker": "BSC",
                     "name": "Bear Stearns",
+                    "description": "The first domino. Heavily exposed to subprime mortgages. Bleeding cash daily.",
                     "sector": "Finance",
                     "type": "Stock",
                     "fate": "Acquired"
@@ -1173,6 +1212,7 @@
                 {
                     "ticker": "AIG",
                     "name": "AIG Insurance",
+                    "description": "Insuring the entire global financial system via CDS. If they fail, everyone fails.",
                     "sector": "Finance",
                     "type": "Stock",
                     "fate": "Bailed Out"
@@ -1180,48 +1220,56 @@
                 {
                     "ticker": "C",
                     "name": "Citigroup",
+                    "description": "Financial supermarket. Dancing while the music is playing, but the music is about to stop.",
                     "sector": "Finance",
                     "type": "Stock"
                 },
                 {
                     "ticker": "BAC",
                     "name": "Bank of America",
+                    "description": "Buying Countrywide Financial? A bold move... or a toxic pill?",
                     "sector": "Finance",
                     "type": "Stock"
                 },
                 {
                     "ticker": "GS",
                     "name": "Goldman Sachs",
+                    "description": "The smartest guys in the room. actively betting against the mortgages they sell you.",
                     "sector": "Finance",
                     "type": "Stock"
                 },
                 {
                     "ticker": "AAPL",
                     "name": "Apple",
+                    "description": "Just launched the iPhone. Revolutionizing tech, but can it survive a global meltdown?",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "AMZN",
                     "name": "Amazon",
+                    "description": "AWS is growing. E-commerce is sticky. A rare growth story in a dying economy.",
                     "sector": "Tech",
                     "type": "Stock"
                 },
                 {
                     "ticker": "SPY",
                     "name": "S&P 500 ETF",
+                    "description": "The broader market. Housing crashes usually drag everything down with them.",
                     "sector": "Index",
                     "type": "Index"
                 },
                 {
                     "ticker": "TLT",
                     "name": "Treasury Bonds",
+                    "description": "Flight to safety. When banks collapse, the world buys US debt.",
                     "sector": "Bonds",
                     "type": "Bond"
                 },
                 {
                     "ticker": "GLD",
                     "name": "Gold",
+                    "description": "Hard money. Central banks are printing cash to save the system. Gold loves inflation.",
                     "sector": "Commodity",
                     "type": "Commodity"
                 }
