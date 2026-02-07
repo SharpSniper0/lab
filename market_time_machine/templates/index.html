@@ -4,24 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Market Time Machine</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=13">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
-    <div class="timeline-grid">
-        <header class="timeline-header">
-            <h1>Market Time Machine</h1>
-            <p style="color: var(--text-secondary); margin-top: 10px; font-size: 1.2rem;">Select a historical crash to
-                simulate.</p>
-        </header>
+    <div class="timeline-container">
+        <!-- Header -->
+        <div style="text-align:center; margin-bottom:80px;">
+            <h1
+                style="font-size: 4rem; font-weight: 800; background: linear-gradient(to bottom, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Market Time Machine
+            </h1>
+            <p style="color: var(--text-secondary); margin-top: 10px; font-size: 1.2rem;">
+                Select a historical financial disaster to relive.
+            </p>
+        </div>
+
+        <!-- The Spine -->
+        <div class="timeline-line"></div>
 
         {% for era in scenarios %}
-        <div class="era-card" onclick="window.location.href='/simulate/{{ era.id }}'">
-            <span class="era-year">{{ era.year_start }}</span>
-            <div style="position:relative; z-index: 2;">
+        <div class="timeline-item {{ 'left' if loop.index is odd else 'right' }}"
+            onclick="window.location.href='/simulate/{{ era.id }}'">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-year">{{ era.year_start }}</span>
                 <h2>{{ era.name }}</h2>
                 <p>{{ era.description }}</p>
             </div>
