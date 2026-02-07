@@ -55,6 +55,9 @@ async function init() {
 
 function updateAllocation() {
     let totalUsed = 0;
+    let totalLong = 0;
+    let totalShort = 0;
+
     const sliders = document.querySelectorAll('.allocation-slider');
 
     sliders.forEach(slider => {
@@ -67,8 +70,10 @@ function updateAllocation() {
         // Color Cues
         if (val < 0) {
             label.style.color = '#ff3b30'; // Red for Short
+            totalShort += Math.abs(val);
         } else if (val > 0) {
             label.style.color = '#30d158'; // Green for Long
+            totalLong += Math.abs(val);
         } else {
             label.style.color = '#666';
         }
@@ -79,6 +84,52 @@ function updateAllocation() {
 
     document.getElementById('total-alloc').innerText = totalUsed;
 
+    // --- Update Visualization Cockpit ---
+
+    // 1. Leverage Meter
+    const leverageBar = document.getElementById('leverage-bar');
+    const leverageVal = document.getElementById('leverage-val');
+
+    // Scale: 0 to 200% map to 0-100% width
+    // Actually, let's max out at 200% visually
+    let visualWidth = Math.min((totalUsed / 200) * 100, 100);
+
+    leverageBar.style.width = visualWidth + "%";
+    leverageVal.innerText = totalUsed + "%";
+
+    // Dynamic Color for Leverage
+    if (totalUsed > 100) {
+        leverageBar.style.background = '#ff3b30'; // Danger Red
+        leverageVal.style.color = '#ff3b30';
+    } else if (totalUsed > 80) {
+        leverageBar.style.background = '#ff9f0a'; // Warning Orange
+        leverageVal.style.color = '#ff9f0a';
+    } else {
+        leverageBar.style.background = '#30d158'; // Safe Green
+        leverageVal.style.color = '#30d158';
+    }
+
+    // 2. Composition Bar
+    const compLong = document.getElementById('comp-long');
+    const compCash = document.getElementById('comp-cash');
+    const compShort = document.getElementById('comp-short');
+
+    // Visual Model: [ Long ] [ Cash ] [ Short ]
+    // If Used > 100%, Cash is 0 and we rescale Long/Short to fit container
+    let cashWidth = Math.max(0, 100 - totalUsed);
+
+    if (totalUsed > 100) {
+        // Rescale to fit 100% visual space
+        let total = totalLong + totalShort;
+        compLong.style.width = (totalLong / total * 100) + "%";
+        compShort.style.width = (totalShort / total * 100) + "%";
+        compCash.style.width = "0%";
+    } else {
+        compLong.style.width = totalLong + "%";
+        compShort.style.width = totalShort + "%";
+        compCash.style.width = cashWidth + "%";
+    }
+
     if (totalUsed > 100) document.getElementById('total-alloc').style.color = '#ff3b30';
     else document.getElementById('total-alloc').style.color = '#666';
 }
@@ -87,10 +138,11 @@ function startSimulation() {
     if (!simulationData) return;
 
     // Check exposure
+    // Check exposure
     let totalExposure = Object.values(allocation).reduce((a, b) => a + Math.abs(b), 0);
-    if (totalExposure > 1.05) { // Slight buffer
-        log("ERROR: Exposure > 100%");
-        alert("You cannot invest more than 100% of your capital! Reduce leverage.");
+    if (totalExposure > 2.05) { // Allow up to 200%
+        log("ERROR: Exposure > 200%");
+        alert("Margin Call! You cannot exceed 200% leverage.");
         return;
     }
 
