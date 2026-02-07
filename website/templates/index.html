@@ -161,9 +161,39 @@
     <!-- Parkour Bot (Archived) -->
     <!-- <div id="parkour-bot">...</div> -->
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Unified Navigation Dock -->
+    <nav class="dock-container">
+        <!-- Main Site Links -->
+        <a href="#" class="dock-item active">
+            <span class="dock-icon">🏠</span>
+            <span class="dock-tooltip">Home</span>
+        </a>
+        <a href="#projects" class="dock-item">
+            <span class="dock-icon">💼</span>
+            <span class="dock-tooltip">Work</span>
+        </a>
+        <a href="#travel" class="dock-item">
+            <span class="dock-icon">🌍</span>
+            <span class="dock-tooltip">Travel</span>
+        </a>
+        <a href="#mind" class="dock-item">
+            <span class="dock-icon">🧠</span>
+            <span class="dock-tooltip">Mind</span>
+        </a>
+
+        <div class="dock-separator"></div>
+
+        <!-- App Links -->
+        <a href="https://market-time-machine.onrender.com/" class="dock-item" target="_blank">
+            <span class="dock-icon">📈</span>
+            <span class="dock-tooltip">Market Sim</span>
+        </a>
+        <a href="#" class="dock-item" style="opacity:0.5; cursor:not-allowed;">
+            <span class="dock-icon">🔒</span>
+            <span class="dock-tooltip">MBA Portfolio (Locked)</span>
+        </a>
+    </nav>
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         const visitedCountries = {{ videos.get('visited_countries', []) | tojson }};
     </script>
